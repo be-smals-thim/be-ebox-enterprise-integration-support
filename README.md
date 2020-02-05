@@ -1,2 +1,3 @@
-# be-ebox-enterprise-integration-support
-An unofficial set of tools that helps with integration with www.eboxenterprise.be site
+# Tools & Tricks to integrate with eBox Enterprise
+ 
+An unofficial set of tools that helps with integration with [https://www.eboxenterprise.be]() site.

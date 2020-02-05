@@ -13,7 +13,7 @@ public abstract class POC_CONFIG {
     }
 
 
-    public abstract OauthConfig getServerOauthConfig() ;
+    public abstract OauthConfig getDocumentProviderOauthConfig() ;
 
-    public abstract OauthConfig getCommonUserOauthConfig() ;
+    public abstract OauthConfig getDocumentConsumerOauthConfig() ;
 }

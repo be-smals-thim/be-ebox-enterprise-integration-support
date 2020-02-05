@@ -13,13 +13,14 @@ public class IntrospectPoc {
     public void start(){
         System.out.println("Started at: "+new Date());
         try {
-            // Get token for client (used to get ebox messages)
-            String accessToken = new GetAccessTokenV3().getAccessToken(POC_CONFIG.inst.getCommonUserOauthConfig(),
+            // Get token for Document Provider (used fo introspect)
+            String introspectAccessToken = new GetAccessTokenV3().getAccessToken(POC_CONFIG.inst.getDocumentProviderOauthConfig(), "scope:security:authorization:oauth:oauth-autz-server:introspect");
+
+            // Get token for Document Consumer (used to get ebox messages)
+            String accessToken = new GetAccessTokenV3().getAccessToken(POC_CONFIG.inst.getDocumentConsumerOauthConfig(),
                     "scope:document:management:consult:ws-eboxrestentreprise:messagesfull",
                     "scope:document:management:consult:ws-eboxrestentreprise:summaryownebox"
             );
-            // Get token for server (used fo introspect)
-            String introspectAccessToken = new GetAccessTokenV3().getAccessToken(POC_CONFIG.inst.getServerOauthConfig(), "scope:security:authorization:oauth:oauth-autz-server:introspect");
             System.out.println("Client token: " + accessToken);
             System.out.println("Server token: " + introspectAccessToken);
 
