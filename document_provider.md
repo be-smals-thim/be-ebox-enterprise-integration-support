@@ -56,3 +56,17 @@ There are two use cases for eBox preferences
 - [Federation WS Open Api 2 Spec](openapi/ebox-federation-1.3.yaml)
 - ACC URL: https://services-acpt.socialsecurity.be/REST/ebox/enterprise/federation/v1/  
 - PRD URL:  https://services.socialsecurity.be/REST/ebox/enterprise/federation/v1
+
+## HTTP Cache headers guidelines
+
+In order to offer the best possible user experience it is required to make use of cache control headers on some ``/referneceData/**`` endpoints. These endpoints are heavily used by the eBox Enterprise UI which itself does not use caching so to not impose latency in data updates on the DP. 
+
+The following endpoints are MUST have significant cache control headers. 
+
+- ``/referenceData/messageTypes/*``
+- ``/referenceData/senderOrganization/*``
+- ``/referenceData/senderApplication/*``
+
+We recommend a 2 day fixed cache with non blocking background refresh, but more advanced options can be chosen.
+
+e.g: ``Cache-Control: public, no-transform, proxy-revalidate, max-age=86400``
