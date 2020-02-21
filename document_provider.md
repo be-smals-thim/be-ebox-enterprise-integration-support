@@ -59,7 +59,7 @@ There are two use cases for eBox preferences
 
 ## HTTP Cache headers guidelines
 
-In order to offer the best possible user experience it is required to make use of cache control headers on some ``/referneceData/**`` endpoints. These endpoints are heavily used by the eBox Enterprise UI which itself does not use caching so to not impose latency in data updates on the DP. 
+In order to offer the best possible user experience cache control headers MUST be used on some the ``/referneceData/**`` endpoints. These endpoints are heavily used by the eBox Enterprise UI which itself does not use caching so to not impose latency in data updates on the DP. 
 
 The following endpoints are MUST have significant cache control headers. 
 
