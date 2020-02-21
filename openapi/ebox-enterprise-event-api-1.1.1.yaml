@@ -1,0 +1,190 @@
+swagger: '2.0'
+info:
+  description: This is an API to interact with the events platform of the Belgian federal government
+  version: 1.1.1
+  title: API for event submission and retrieval
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+tags:
+  - name: EboxEnterprise
+
+paths:
+  /ebox/enterprise/document/events:
+    get:
+      tags:
+        - EboxEnterprise
+      summary: returns events related to ebox documents
+      operationId: getEboxEnterpriseDocumentEvents
+      description: Returns events related to ebox documents.
+      produces:
+        - application/json
+      parameters:
+        - name: clientId
+          in: query
+          description: identifier of the client / application that whishes to retrieve the events.
+          required: false
+          type: string
+        - name: lastSequenceNbr
+          in: query
+          description: the last event sequence number of the previous page
+          required: true
+          type: integer
+          format: int64
+        - name: startTime
+          in: query
+          description: the start-time from when events should be returned
+          required: false
+          type: string
+          format: date-time
+        - name: pageSize
+          in: query
+          description: the maximum number of events to return
+          required: true
+          type: integer
+          format: int32
+        - name: filter
+          in: query
+          required: false
+          type: string
+      responses:
+        200:
+          description: search results matching criteria
+          schema:
+            $ref: '#/definitions/EboxEnterpriseDocumentEventPage'
+        400:
+          description: bad input parameter
+        403:
+          description: client not authorized for getEboxEnterpriseDocumentEvents operation
+    post:
+      tags:
+        - EboxEnterprise
+      summary: submit events related to ebox documents
+      operationId: submitEboxEnterpriseDocumentEvents
+      description: Submit events related to ebox documents.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: clientId
+          description: identifier of the client / application that whishes to submit the events.
+          required: false
+          type: string
+        - in: body
+          name: EboxEnterpriseDocumentEvents
+          description: Ebox Document events to submit
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/EboxEnterpriseDocumentEvent'
+      responses:
+        201:
+          description: events created
+        400:
+          description: invalid input, object invalid
+        403:
+          description: client not authorized for submitEboxEnterpriseDocumentEvents operation
+        409:
+          description: idempotency violation
+definitions:
+  EboxEnterpriseDocumentEvent:
+    type: object
+    properties:
+      eventType:
+        type: string
+        enum:
+          - "newDocument"
+          - "newDocumentReminder"
+          - "readDocument"
+          - "documentExpirationAlert"
+      eventCorrelationId:
+        type: string
+        description: the correlation identifier of the client / application for this event
+      enterpriseId:
+        type: string
+        description: the kbo/cbe number of the enterprise
+        pattern: "[0-9]{10}"
+      messageId:
+        type: string
+      receiptDate:
+        type: string
+        format: date-time
+      expirationDate:
+        type: string
+        format: date-time
+      registeredMail:
+        type: boolean
+      messageTypeId:
+        type: string
+      senderOrganizationId:
+        type: string
+      senderApplicationId:
+        type: string
+      subject:
+        $ref: '#/definitions/TranslatedString'
+    required:
+      - eventType
+      - enterpriseId
+      - messageId
+      - receiptDate
+      - expirationDate
+      - registeredMail
+  EboxEnterpriseDocumentEventPageItem:
+    type: object
+    properties:
+      eventSequenceNbr:
+        type: integer
+        format: int64
+      eventTime:
+        type: string
+        format: date-time
+      eventProviderId:
+        type: string
+        description: the identifier of the document provider
+      eventData:
+        $ref: '#/definitions/EboxEnterpriseDocumentEvent'
+    required:
+      - eventSequenceNbr
+      - eventTime
+      - eventProviderId
+      - eventData
+  EboxEnterpriseDocumentEventPage:
+    type: object
+    properties:
+      EboxEnterpriseDocumentEvents:
+        type: array
+        items:
+          $ref: '#/definitions/EboxEnterpriseDocumentEventPageItem'
+      pageInfo:
+        $ref: '#/definitions/EventPageInfo'
+  EventPageInfo:
+    type: object
+    properties:
+      lastSequenceNbr:
+        type: integer
+        format: int64
+      hasNext:
+        type: boolean
+    required:
+      - lastSequenceNbr
+      - hasNext
+  TranslatedString:
+    type: object
+    properties:
+      nl:
+        type: string
+      fr:
+        type: string
+      de:
+        type: string
+      en:
+        type: string
+# Added by API Auto Mocking Plugin
+host: digital.belgium.be
+# basePath: /events-api/v1
+schemes:
+  - https
+# Added by API Auto Mocking Plugin
+basePath: /events-api/1.0.0
