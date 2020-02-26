@@ -1,0 +1,1643 @@
+swagger: "2.0"
+info:
+  description: "RESTful API designed as the Message Registry Contracts of the e-Box Federation. The new version 2.0 is used for both e-Box Citizen and e-Box Enterprise."
+  version: "2.1"
+  title: "EBOX REST API"
+  contact:
+    name: "eBoxIntegration"
+    email: "eboxintegration@smals.be"
+  license:
+    name: "e-Box"
+    url: "http://www.digitalbelgium.be"
+basePath: "/ebox/$domain/v$"
+tags:
+- name: "Ebox"
+- name: "Messages"
+- name: "ReferenceData"
+schemes:
+- "https"
+paths:
+  /ebox:
+    get:
+      tags:
+      - "Ebox"
+      summary: "Get the summary of the ebox."
+      description: "The implementation of this operation is required"
+      operationId: "getEBoxById"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Ebox"
+        400:
+          description: "Invalid data supplied"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        401:
+          description: "Invalid authorization"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        404:
+          description: "No messages found"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+  /ebox/messages:
+    get:
+      tags:
+      - "Messages"
+      summary: "Get a collection of messages. Messages are the main elements contained\
+        \ in an ebox. A message is basically composed of a set of metadata (e.g. subject,\
+        \ receipt date, etc.), one body, one or more attachments."
+      description: "The implementation of this operation is required"
+      operationId: "getMessagesByEBoxId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "page"
+        in: "query"
+        description: "The index of the current page of items."
+        required: false
+        type: "integer"
+        default: 1
+        minimum: 1.0
+        format: "int32"
+      - name: "pageSize"
+        in: "query"
+        description: "The maximal number of results per page."
+        required: false
+        type: "integer"
+        default: 25
+        maximum: 100.0
+        minimum: 1.0
+        format: "int32"
+      - name: "receivedBefore"
+        in: "query"
+        description: "Select only the messages received before the given date."
+        x-example: "?receivedBefore:2017-07-01"
+        required: false
+        type: "string"
+        format: "date"
+      - name: "receivedAfter"
+        in: "query"
+        description: "Select only the messages received after the given date."
+        x-example: "?receivedAfter:2017-07-01"
+        required: false
+        type: "string"
+        format: "date"
+      - name: "expiredBefore"
+        in: "query"
+        description: "Select only the messages that will expire before the given date."
+        x-example: "?expiredBefore:2017-07-01"
+        required: false
+        type: "string"
+        format: "date"
+      - name: "expiredAfter"
+        in: "query"
+        description: "Select only the messages that will expire after the given date."
+        x-example: "?expiredAfter:2020-01-01"
+        required: false
+        type: "string"
+        format: "date"
+      - name: "readStatus"
+        in: "query"
+        description: "Indication of the readStatus"
+        required: false
+        type: "boolean"
+      - name: "visible"
+        in: "query"
+        description: "Indicates if the messages are visible or not"
+        required: false
+        type: "boolean"
+      - name: "messageTypeId"
+        in: "query"
+        description: "The messageTypeId linked to this message"
+        required: false
+        type: "string"
+      - name: "senderOrganizationId"
+        in: "query"
+        description: "The companyId of the sender"
+        required: false
+        type: "string"
+      - name: "senderApplicationId"
+        in: "query"
+        description: "The applicationId of the sender"
+        required: false
+        type: "string"
+      - name: "q"
+        in: "query"
+        description: "Filter messages containing the search parameter in the metadata of the message or the reference data of the organization, application or message type"
+        required: false
+        type: "string"
+      - name: "registeredMail"
+        in: "query"
+        description: "Filter on registeredMail property"
+        required: false
+        type: "boolean"
+      - name: "qlang"
+        in: "query"
+        description: "For textual search, only search in the textual data of the chosen language. This query parameter is required in a request that contains the 'q' query parameter. The resulting list of messages will only consist of messages that contain the search parameter in the language defined in the qlang parameter"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Messages"
+        400:
+          description: "Invalid data supplied"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        401:
+          description: "Invalid authorization"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        404:
+          description: "Message not found"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+    patch:
+      tags:
+      - "Messages"
+      summary: "Update certain properties of a collection of messages in the current ebox."
+      description: "The implementation of this operation is required for eBox Enterprise and optional for eBox Citizen"
+      operationId: "patchMessagesByEBoxId"
+      consumes:
+        - "application/merge-patch+json"
+      parameters:
+      - in: "body"
+        name: "messagesToUpdate"
+        description: "The list of messages to update."
+        schema:
+          $ref: "#/definitions/MessagesToUpdate"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid data supplied"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        401:
+          description: "Invalid authorization"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        404:
+          description: "Message/s not found"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+  /ebox/messages/{messageId}:
+    get:
+      tags:
+      - "Messages"
+      summary: "Get a message by its messageId"
+      description: "The implementation of this operation is required"
+      operationId: "getMessageById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "messageId"
+        in: "path"
+        description: "The identifier of the message"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Message"
+        400:
+          description: "Invalid data supplied"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        401:
+          description: "Invalid authorization"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        404:
+          description: "Message not found"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+  /ebox/messages/{messageId}/attachments:
+    get:
+      tags:
+        - "Messages"
+      summary: "Get a collection of attachment metadata by the messageId"
+      description: "The implementation of this operation is required"
+      operationId: "getAttachmentByMessageId"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "messageId"
+          in: "path"
+          description: "The identifier of the message"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: '#/definitions/Attachments'
+        400:
+          description: "Invalid data supplied"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        401:
+          description: "Invalid authorization for messageId"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        404:
+          description: "messageId not found"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+  /ebox/messages/{messageId}/attachments/{attachmentId}:
+    get:
+      tags:
+        - "Messages"
+      summary: "Get the attachment metadata by its attachmentId"
+      description: "The implementation of this operation is required"
+      operationId: "getAttachmentById"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "messageId"
+          in: "path"
+          description: "The identifier of the message"
+          required: true
+          type: "string"
+        - name: "attachmentId"
+          in: "path"
+          description: "The identifier of the attachment"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Attachment"
+        400:
+          description: "Invalid data supplied"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        401:
+          description: "Invalid authorization for attachment"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        404:
+          description: "Attachment not found"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+  /ebox/messages/{messageId}/attachments/{attachmentId}/content:
+    get:
+      tags:
+      - "Messages"
+      summary: "Get the attachment content by its attachmentId"
+      description: "The implementation of this operation is required"
+      operationId: "getAttachmentContentById"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - name: "messageId"
+        in: "path"
+        description: "The identifier of the message"
+        required: true
+        type: "string"
+      - name: "attachmentId"
+        in: "path"
+        description: "The identifier of the attachment"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+        400:
+          description: "Invalid data supplied"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        401:
+          description: "Invalid authorization for attachment"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        404:
+          description: "Attachment not found"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+  /ebox/messages/{messageId}/body:
+    get:
+      tags:
+      - "Messages"
+      summary: "Get the body content"
+      description: "The implementation of this operation is optional"
+      operationId: "getBodyContent"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "messageId"
+        in: "path"
+        description: "The identifier of the message"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/TranslatedString"
+        400:
+          description: "Invalid data supplied"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        401:
+          description: "Invalid authorization"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        404:
+          description: "Body not found"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+  /ebox/messages/{messageId}/paymentData:
+    get:
+      tags:
+        - "Messages"
+      summary: "Get the paymentData of a message"
+      description: "The implementation of this operation is optional"
+      operationId: "getPaymentDataByMessageId"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "messageId"
+          in: "path"
+          description: "The identifier of the message"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: '#/definitions/PaymentData'
+        400:
+          description: "Invalid data supplied"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        401:
+          description: "Invalid authorization"
+          schema:
+            $ref: '#/definitions/StatusMessage'
+        404:
+          description: "PaymentData not found"
+          schema:
+            $ref: '#/definitions/StatusMessage'
+  /publishMessage:
+    post:
+      tags:
+      - "Messages"
+      summary: "Publish a new message, using multipart request: one JSON as the message description and one or more attachments. The 'originalMessageId' tag in the JSON-part indicates a reply in a bidirectional flow."
+      description: "The implementation of this operation is optional"
+      operationId: "postMessage"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "formData"
+        name: "messageToPublish"
+        type: "string"
+        required: true
+        description: "JSON-description of the message to Publish. See MessageToPublish definition."
+        x-example: "See MessageToPublish definition."
+      - in: "formData"
+        name: "upfile1"
+        type: "file"
+        required: false
+      - in: "formData"
+        name: "upfile2"
+        type: "file"
+        required: false
+      - in: "formData"
+        name: "upfile3"
+        type: "file"
+        required: false
+      - in: "formData"
+        name: "upfile4"
+        type: "file"
+        required: false
+      - in: "formData"
+        name: "upfile5"
+        type: "file"
+        required: false
+      - in: "formData"
+        name: "upfile6"
+        type: "file"
+        required: false
+      responses:
+        201:
+          description: "Created"
+          schema:
+            $ref: "#/definitions/PublicationStatusMessage"
+        400:
+          description: "Invalid data supplied"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        401:
+          description: "Invalid authorization"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+  /linkEboxMessage:
+    post:
+      tags:
+      - "Messages"
+      summary: "Link a message to a list of recipients (broadcast publication). The messageId must have been published by the same sender."
+      description: "The implementation of this operation is optional"
+      operationId: "linkMessage"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "messageToLink"
+        description: "The MessageToLink contains the messageId and the list of recipients."
+        schema:
+          $ref: "#/definitions/MessageToLink"
+      responses:
+        201:
+          description: "Created"
+          schema:
+            $ref: "#/definitions/LinkResponse"
+        400:
+          description: "Invalid data supplied"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        401:
+          description: "Invalid authorization"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        404:
+          description: "Messages not found"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+  /searchMessageStatus:
+    post:
+      tags:
+      - "Messages"
+      summary: "Get a messageStatus for a list of messages."
+      description: "The implementation of this operation is optional"
+      operationId: "getStatus"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "messagesStatusRequest"
+        description: "The MessagesStatusRequest is a list of couples 'messageId/eboxId'."
+        schema:
+          $ref: "#/definitions/MessagesStatusRequest"
+      responses:
+        201:
+          description: "Created"
+          schema:
+            $ref: "#/definitions/MessagesStatusList"
+        400:
+          description: "Invalid data supplied"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        401:
+          description: "Invalid authorization"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        404:
+          description: "Messages not found"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+  /referenceData/messageTypes:
+    get:
+      tags:
+      - "ReferenceData"
+      summary: "Get a collection of messageTypeSummary. MessageTypes are the different\
+        \ types of messages defined by the senders. A messageType usually corresponds\
+        \ to a business category of a letter or document (e.g. attestation X., declaration\
+        \ Y., communication Z., etc.). "
+      description: "The implementation of this operation is required"
+      operationId: "getAllMessagesTypes"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "page"
+        in: "query"
+        description: "The index of the current page of items."
+        required: false
+        type: "integer"
+        default: 1
+        minimum: 1.0
+        format: "int32"
+      - name: "pageSize"
+        in: "query"
+        description: "The maximal number of results per page."
+        required: false
+        type: "integer"
+        default: 25
+        maximum: 100.0
+        minimum: 1.0
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/MessageTypes"
+        400:
+          description: "Invalid data supplied"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        401:
+          description: "Invalid authorization"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        404:
+          description: "messageTypes not found"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+  /referenceData/messageTypes/{messageTypeId}:
+    get:
+      tags:
+      - "ReferenceData"
+      summary: "Get a messageType by its messageTypeId. A messageType usually corresponds\
+        \ to a business category of a letter or document (e.g. attest X., declaration\
+        \ Y., communication Z., etc.). A messageType gives all the detailed information\
+        \ about a type of message, such as the name or the description."
+      description: "The implementation of this operation is required"
+      operationId: "getMessageTypeById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "messageTypeId"
+        in: "path"
+        description: "The identifier of the messageType"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/MessageType"
+        400:
+          description: "Invalid data supplied"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        401:
+          description: "Invalid authorization"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        404:
+          description: "messageTypeId not found"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+  /referenceData/senderApplications:
+    get:
+      tags:
+      - "ReferenceData"
+      summary: "List all senderApplications. SenderApplications are the different\
+        \ applications (online services...) that send messages to enterprises."
+      description: "The implementation of this operation is required"
+      operationId: "findAllSenderApplications"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "page"
+        in: "query"
+        description: "The index of the current page of items."
+        required: false
+        type: "integer"
+        default: 1
+        minimum: 1.0
+        format: "int32"
+      - name: "pageSize"
+        in: "query"
+        description: "The maximal number of results per page"
+        required: false
+        type: "integer"
+        default: 25
+        maximum: 100.0
+        minimum: 1.0
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SenderApplications"
+        400:
+          description: "Invalid data supplied"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        401:
+          description: "Invalid authorization"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        404:
+          description: "senderApplications not found"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+  /referenceData/senderApplications/{senderApplicationId}:
+    get:
+      tags:
+      - "ReferenceData"
+      summary: "Get a senderApplication by its senderApplicationId"
+      description: "The implementation of this operation is required"
+      operationId: "getSenderApplicationById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "senderApplicationId"
+        in: "path"
+        description: "The applicationId of the sender"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SenderApplication"
+        400:
+          description: "Invalid data supplied"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        401:
+          description: "Invalid authorization"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        404:
+          description: "senderApplicationId not found"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+  /referenceData/senderApplications/{senderApplicationId}/images/{imageId}/content:
+    get:
+      tags:
+      - "ReferenceData"
+      summary: "Get an image by its imageId"
+      description: "The implementation of this operation is optional"
+      operationId: "getImageForSenderApplication"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - name: "imageId"
+        in: "path"
+        description: "The identifier of the image"
+        required: true
+        type: "string"
+      - name: "senderApplicationId"
+        in: "path"
+        description: "The identifier of the application"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+        400:
+          description: "Invalid data supplied"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        401:
+          description: "Invalid authorization"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        404:
+          description: "Image not found"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+  /referenceData/senderOrganizations:
+    get:
+      tags:
+      - "ReferenceData"
+      summary: "List all senderOrganizations. SenderOrganizations are the different\
+        \ organizations (Institutions, companies...) that send messages to enterprises."
+      description: "The implementation of this operation is required"
+      operationId: "findAllSenderOrganizations"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "page"
+        in: "query"
+        description: "The index of the current page of items"
+        required: false
+        type: "integer"
+        default: 1
+        minimum: 1.0
+        format: "int32"
+      - name: "pageSize"
+        in: "query"
+        description: "The maximal number of results per page"
+        required: false
+        type: "integer"
+        default: 25
+        maximum: 100.0
+        minimum: 1.0
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SenderOrganizations"
+        400:
+          description: "Invalid data supplied"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        401:
+          description: "Invalid authorization for senderOrganizations"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        404:
+          description: "senderOrganizations not found"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+  /referenceData/senderOrganizations/{senderOrganizationId}:
+    get:
+      tags:
+      - "ReferenceData"
+      summary: "Get a senderOrganization by its companyId"
+      description: "The implementation of this operation is required"
+      operationId: "getSenderOrganizationById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "senderOrganizationId"
+        in: "path"
+        description: "The organizationId of the sender"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SenderOrganization"
+        400:
+          description: "Invalid data supplied"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        401:
+          description: "Invalid authorization"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        404:
+          description: "senderOrganizationId not found"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+  /referenceData/senderOrganizations/{senderOrganizationId}/images/{imageId}/content:
+    get:
+      tags:
+      - "ReferenceData"
+      summary: "Get an image by its imageId"
+      description: "The implementation of this operation is optional for eBox Enterprise and required for eBox Citizen"
+      operationId: "getImageForSenderOrganization"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - name: "imageId"
+        in: "path"
+        description: "The identifier of the image"
+        required: true
+        type: "string"
+      - name: "senderOrganizationId"
+        in: "path"
+        description: "The identifier of the institution"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+        400:
+          description: "Invalid data supplied"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        401:
+          description: "Invalid authorization"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+        404:
+          description: "Image not found"
+          schema:
+            $ref: "#/definitions/StatusMessage"
+definitions:
+  Attachment:
+    type: "object"
+    required:
+      - "size"
+      - "mainContent"
+      - "mediaType"
+      - "fileName"
+    properties:
+      attachmentId:
+        type: "string"
+        description: "Unique identifier of the attachment"
+      attachmentTitle:
+        description: "Common type defined to provide a string value for each supported\
+          \ language among nl, fr, de"
+        $ref: "#/definitions/TranslatedString"
+      fileName:
+        type: "string"
+        description: "The file name provided by the sender, with its extension"
+      mainContent:
+        type: "boolean"
+        description: "Indicates the priority of this attachment: 'true' means that this attachment is considered as main content of the message, 'false' means this attachment is considered as an annex. Attention, the readStatus of a message will be true as soon as a 'mainContent' is consulted."
+      mediaType:
+        type: "string"
+        description: "Standardized identifier for file formats following RFC2046"
+        enum:
+        - "application/pdf"
+        - "application/zip"
+        - "text/csv"
+        - "text/html"
+        - "text/plain"
+        - "text/xml"
+        - "application/vnd.oasis.opendocument.text"
+        - "application/vnd.oasis.opendocument.spreadsheet"
+        - "application/vnd.oasis.opendocument.presentation"
+        - "application/vnd.oasis.opendocument.graphics"
+        - "application/vnd.ms-excel"
+        - "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        - "application/vnd.ms-powerpoint"
+        - "application/msword"
+        - "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      size:
+        type: "number"
+        format: "double"
+        example: 1800.0
+        description: "Size of the attachment, expressed in kB"
+      digest:
+        description: "Object containing the digestValue and digestMethod describing\
+          \ the cryptographic hash function of an item"
+        $ref: "#/definitions/Digest"
+      attachmentSigned:
+        type: "boolean"
+        description: "Boolean used to indicate if the attachment is signed or not."
+        default: false
+      contentHref:
+        type: "string"
+        format: "uri"
+        description: "URL to the content of the attachment"
+    description: "An attachment item contains all the metadata of an attachment and\
+      \ the link to the attachtment content itself"
+  Attachments:
+    type: "object"
+    properties:
+      items:
+        type: "array"
+        items:
+          $ref: "#/definitions/Attachment"
+      totalItems:
+        type: "integer"
+        format: "int32"
+    description: "A paged list of attachments containing the metadata of the\
+      \ attachments and link to the attachtment itself"
+  AttachmentToPublish:
+    type: "object"
+    required:
+      - "mainContent"
+      - "httpPartName"
+    properties:
+      attachmentTitle:
+        description: "Common type defined to provide a string value for each supported\
+            \ language among nl, fr, de, en"
+        $ref: "#/definitions/TranslatedString"
+      httpPartName:
+        type: "string"
+        description: "the name of the http part that contain the bytes, filename and mime type of the document"
+      mainContent:
+        type: "boolean"
+        description: "Indicates the priority of this attachment: 'true' means that this attachment is considered as main content of the message, 'false' means this attachment is considered as an annex. Attention, the readStatus of a message will be true as soon as a 'mainContent' is consulted."
+      digest:
+        description: "Object containing the digestValue and digestMethod describing\
+            \ the cryptographic hash function of an item"
+        $ref: "#/definitions/Digest"
+      attachmentSigned:
+        type: "boolean"
+        description: "Boolean used to indicate if the attachment is signed or not."
+        default: false
+    description: "An attachment item contains the meta data of the attachment"
+  BusinessData:
+    type: object
+    description: A businessData element contains businessData concerning the message
+      linked to it, in the form of a name, an optional description and an
+      array of values.
+    properties:
+      key:
+        type: string
+        description: Significative key of the businessData element.
+      name:
+        $ref: "#/definitions/TranslatedString"
+      description:
+        $ref: "#/definitions/TranslatedString"
+      values:
+        description: Values represented by the businessData.
+        type: array
+        items:
+          $ref: "#/definitions/TranslatedString"
+    required:
+      - key
+      - name
+      - values
+  BusinessDataList:
+    type: object
+    description: The BusinessDataList contains the list of all BusinessData elements linked to the message.
+    properties:
+      items:
+        type: array
+        items:
+          $ref: "#/definitions/BusinessData"
+      totalItems:
+        type: integer
+        format: int32
+  BusinessDataToPublish:
+    type: object
+    description: A businessData element contains businessData concerning the message
+      linked to it, in the form of a name and an array of values. To publish a BusinessData
+      element, at least a key and an array of values is needed.
+    properties:
+      key:
+        type: string
+        description: Significative key of the businessData element
+      name:
+        $ref: "#/definitions/TranslatedString"
+      description:
+        $ref: "#/definitions/TranslatedString"
+      values:
+        description: Values represented by the businessData.
+        type: array
+        items:
+          $ref: "#/definitions/TranslatedString"
+    required:
+      - key
+      - values
+  Detail:
+    type: "object"
+    properties:
+      kind:
+        type: "object"
+      message:
+        type: "object"
+      ref:
+        type: "object"
+      value:
+        type: "object"
+  Digest:
+    type: "object"
+    required:
+    - "digestMethod"
+    - "digestValue"
+    properties:
+      digestValue:
+        type: "string"
+        description: "Digest value returned by the cryptographic hash function encoded in base64url as defined in RFC 4648 §5 (https://tools.ietf.org/html/rfc4648#section-5)"
+      digestMethod:
+        type: "string"
+        description: "Cryptographic hash function used to obtain the digest"
+        enum:
+        - "sha_256"
+    description: "Object containing the digestValue and digestMethod describing the\
+      \ cryptographic hash function of an item"
+  Ebox:
+    type: "object"
+    required:
+    - "numberOfMessages"
+    properties:
+      numberOfMessages:
+        type: "integer"
+        format: "int32"
+        example: 36
+        description: "Total number of messages available in this ebox."
+      numberOfUnreadMessages:
+        type: "integer"
+        format: "int32"
+        example: 2
+        description: "Number of unread messages in this ebox."
+      lastReceiptDate:
+        type: "string"
+        format: "date-time"
+        example: "2017-07-24T09:26:00Z"
+        description: "Receipt date (date-time format: yyyy-MM-dd'T'HH:mm:ssXXX) of\
+          \ the most recent message in this ebox."
+      lastConsultationDate:
+        type: "string"
+        format: "date-time"
+        example: "2017-08-01T15:34:00Z"
+        description: "Date-time of the last moment when the ebox was accessed"
+      eboxSize:
+        type: "number"
+        format: "double"
+        example: 1800.0
+        description: "Cumulative total of attachments sizes (related to all the available\
+          \ messages in this ebox), expressed in kilobytes (1 kilobyte = 1024 bytes)."
+    description: "An enterprise ebox. An ebox represents the electronic post-box, made\
+      \ available by a given MessageRegistry Provider, for a given enterprise."
+  EboxId:
+    type: "object"
+    required:
+    - "eboxType"
+    - "eboxIdValue"
+    properties:
+      eboxType:
+        type: "string"
+        enum:
+        - "enterprise"
+        - "citizen"
+      eboxIdValue:
+        type: "string"
+        example: "0406798006"
+  EboxIdList:
+    type: "array"
+    items:
+      $ref: "#/definitions/EboxId"
+  LinkResponse:
+    type: "object"
+    properties:
+      messageId:
+        type: "string"
+        description: "Unique identifier of the message in the ebox."
+      expirationDate:
+        type: "string"
+        format: "date-time"
+        description: "Date-time (yyyy-MM-dd'T'HH:mm:ssXXX) when the message will expire\
+          \ in the ebox."
+      nbSuccessLinks:
+        type: "integer"
+        description: "Number of successful links as result of a /linkEboxMessage request."
+        format: "int32"
+        example: 42
+      errorCases:
+        type: "array"
+        items:
+          $ref: "#/definitions/EboxId"
+  Image:
+    type: "object"
+    required:
+    - "imageId"
+    - "size"
+    - "mediaType"
+    - "contentHref"
+    properties:
+      imageId:
+        type: "string"
+        description: "Identifier of the image"
+      size:
+        type: "number"
+        format: "double"
+        example: 1800.0
+        description: "Size of the image, expressed in kB"
+      mediaType:
+        type: "string"
+        description: "Format of the image following RFC2046"
+        enum:
+        - "image/jpg"
+        - "image/jpeg"
+        - "image/png"
+        - "image/gif"
+        - "image/svg+xml"
+      language:
+        type: string
+        description: Language of the image
+        enum:
+        - "nl"
+        - "fr"
+        - "de"
+      contentHref:
+        type: "string"
+        format: "uri"
+    description: "An image gives the metadata and the base64 content of the image"
+  MessageIdEboxId:
+    type: "object"
+    properties:
+      messageId:
+        type: "string"
+        description: "Identifier of a message"
+      eboxId:
+        $ref: "#/definitions/EboxId"
+  Message:
+    type: "object"
+    required:
+    - "expirationDate"
+    - "messageId"
+    - "messageTypeId"
+    - "readStatus"
+    - "receiptDate"
+    - "registeredMail"
+    - "senderOrganizationId"
+    - "subject"
+    - "bodyMainContent"
+    - "replyAuthorized"
+    properties:
+      messageId:
+        type: "string"
+        description: "Unique identifier of the message in the ebox."
+      originalMessageId:
+        type: "string"
+        description: "Id of the original message (bidirectional use case)."
+      subject:
+        description: "Common type defined to provide a string value for each supported\
+          \ language among nl, fr, de"
+        $ref: "#/definitions/TranslatedString"
+      receiptDate:
+        type: "string"
+        format: "date-time"
+        description: "Date-time (yyyy-MM-dd'T'HH:mm:ssXXX) when the message was received\
+          \ in the ebox."
+      expirationDate:
+        type: "string"
+        format: "date-time"
+        description: "Date-time (yyyy-MM-dd'T'HH:mm:ssXXX) when the message will expire\
+          \ in the ebox."
+      readStatus:
+        type: "boolean"
+        description: "Indicates whether or not the message has already been opened."
+        default: false
+      visible:
+        type: "boolean"
+        description: "Indication whether or not the message is visible or not."
+        default: true
+      registeredMail:
+        type: "boolean"
+        description: "Indicates whether or not the message was published as a registered\
+          \ mail in the ebox."
+        default: false
+      forTheAttentionOf:
+        description: "Indication when the message is for the attention of a specific person, identified by the National registry number of this person."
+        $ref: "#/definitions/ForTheAttentionOf"
+      messageTypeId:
+        type: "string"
+        description: "Identifier of a messageType"
+      senderOrganizationId:
+        type: "string"
+        example: "0406798006"
+        description: "Enterprise number (BCE - KBO number) of the sender organisation"
+        pattern: "[0-1][0-9]{9}"
+      senderApplicationId:
+        type: "string"
+        description: "Identifier of the senderApplication"
+      attachments:
+        $ref: "#/definitions/Attachments"
+      bodyMainContent:
+        type: "boolean"
+        description: "This property must be present only if there is a body. Indicates the priority of the bodyContent: 'true' means that the body is considered as main content of the message, 'false' means it is considered as an annex. Attention, the readStatus of a message will be true as soon as a 'mainContent' is consulted."
+        default: false
+      paymentData:
+        description: "Data concerning payments"
+        $ref: "#/definitions/PaymentData"
+      businessDataList:
+        description: A businessDataList with the BusinessData elements linked to the linked message.
+        $ref: "#/definitions/BusinessDataList"
+      replyAuthorized:
+        type: "boolean"
+        description: "Indicate if the message allows replies"
+        default: false
+    description: "A message is basically composed of a set of metadata (e.g. subject,\
+      \ receipt date, read status, etc.), one body, one or more attachments."
+  MessageToPublish:
+    type: "object"
+    description: "A messageToPublish is basically composed of a mandatory set of metadata (e.g. recipient, subject, messageTypeId, etc.); optional attachment(s) and/or body, with at least one main content."
+    required:
+    - "recipient"
+    - "subject"
+    - "bodyMainContent"
+    - "replyAuthorized"
+    properties:
+      recipient:
+        $ref: "#/definitions/EboxId"
+      forTheAttentionOf:
+        description: "Indication when the message is for the attention of a specific person, identified by the National registry number of this person."
+        $ref: "#/definitions/ForTheAttentionOf"
+      originalMessageId:
+        type: "string"
+        description: "Id of the original message (bidirectional use case)."
+      subject:
+        description: "Subject is the title of the message in each language."
+        $ref: "#/definitions/TranslatedString"
+      messageTypeId:
+        type: "string"
+        description: "Identifier of a messageType"
+      expirationDate:
+        type: "string"
+        format: "date-time"
+        description: "Date-time (yyyy-MM-dd'T'HH:mm:ssXXX) when the message will expire\
+          \ in the ebox."
+      senderOrganizationId:
+        type: "string"
+        example: "0406798006"
+        description: "Enterprise number (BCE - KBO number) of the sender organization"
+        pattern: "[0-1][0-9]{9}"
+      senderApplicationId:
+        type: "string"
+        description: "Identifier of the senderApplication"
+      registeredMail:
+        type: "boolean"
+        description: "Indicates whether or not the message was published as a registered\
+          \ mail in the ebox. Attention, publish a registeredMail to EBOX is only possible for EPOST service."
+        default: false
+      attachments:
+        type: "array"
+        description: "A list of attachments"
+        items:
+          $ref: "#/definitions/AttachmentToPublish"
+      bodyMainContent:
+        type: "boolean"
+        description: "This property must be present only if there is a body. Indicates the priority of the bodyContent: 'true' means that the body is considered as main content of the message, 'false' means it is considered as an annex. Attention, the readStatus of a message will be true as soon as a 'mainContent' is consulted."
+        default: false
+      bodyContent:
+        $ref: "#/definitions/TranslatedString"
+      businessDataList:
+        type: "array"
+        description: "List of business data"
+        items:
+          $ref: "#/definitions/BusinessDataToPublish"
+      paymentData:
+        type: "object"
+        description: "The paymentData linked to the message being published"
+        $ref: "#/definitions/PaymentData"
+      replyAuthorized:
+        type: "boolean"
+        description: "Indicate if the message allows replies"
+        default: false
+  MessageToLink:
+    type: "object"
+    required:
+    - "messageId"
+    - "recipients"
+    properties:
+      messageId:
+        type: "string"
+        description: "Unique identifier of the message in the ebox."
+      recipients:
+          $ref: "#/definitions/EboxIdList"
+  MessageToUpdate:
+    type: "object"
+    required:
+    - "messageId"
+    - "visible"
+    properties:
+      messageId:
+        type: "string"
+        description: "Unique identifier of the message in the ebox."
+      visible:
+        type: "boolean"
+        description: "Indication whether or not the message is visible or not."
+        default: false
+    description: "A MessageToUpdate contains the attributes of a message that an authorized user can update."
+  MessageType:
+    type: "object"
+    required:
+    - "messageTypeId"
+    - "messageTypeName"
+    properties:
+      messageTypeId:
+        type: "string"
+        description: "Identifier of a messageType"
+      messageTypeName:
+        description: "Common type defined to provide a string value for each supported\
+          \ language among nl, fr, de"
+        $ref: "#/definitions/TranslatedString"
+      messageTypeDescription:
+        description: "Common type defined to provide a string value for each supported\
+          \ language among nl, fr, de"
+        $ref: "#/definitions/TranslatedString"
+      validityPeriod:
+        description: "Validity period of the messageType, indicating when messages\
+          \ of this type expire and are no longer available"
+        $ref: "#/definitions/ValidityPeriod"
+      senderOrganizationIds:
+        type: "array"
+        description: "Array of senderOrganization identifiers that can publish messages\
+          \ of this messageType"
+        items:
+          type: "string"
+      senderApplicationIds:
+        type: "array"
+        description: "Array of senderApplication identifiers that can publish messages\
+          \ of this messageType"
+        items:
+          type: "string"
+    description: "A MessageType corresponds to a business category of a letter or\
+      \ document (e.g. attestation X., declaration Y., communication Z., etc.). "
+  MessageTypes:
+    type: "object"
+    properties:
+      items:
+        type: "array"
+        items:
+          $ref: "#/definitions/MessageType"
+      totalItems:
+        type: "integer"
+        format: "int32"
+    description: "A paged list of messageTypes. MessageTypes are the different\
+      \ types of messages defined by the senders. A messageType usually corresponds\
+      \ to a business category of a letter or document (e.g. attestation X., declaration\
+      \ Y., communication Z., etc.). "
+  Messages:
+    type: "object"
+    properties:
+      items:
+        type: "array"
+        items:
+          $ref: "#/definitions/Message"
+      totalItems:
+        type: "integer"
+        format: "int32"
+    description: "A paged list of messages. Messages are the main elements\
+      \ contained in an ebox. A message is basically composed of a set of metadata\
+      \ (e.g. subject, receipt date, etc.) and the content, being one body and/or\
+      \ one or more attachments."
+  MessagesToUpdate:
+    type: "object"
+    properties:
+      items:
+        type: "array"
+        items:
+          $ref: "#/definitions/MessageToUpdate"
+      totalItems:
+        type: "integer"
+        format: "int32"
+    description: "A paged list of messageToUpdate."
+  MessagesStatusRequest:
+    type: "array"
+    items:
+      $ref: "#/definitions/MessageIdEboxId"
+  MessageStatus:
+    type: "object"
+    required:
+    - "messageId"
+    - "eboxId"
+    - "readStatus"
+    properties:
+      messageId:
+        type: "string"
+        description: "Identifier of a message"
+      eboxId:
+        $ref: "#/definitions/EboxId"
+      expirationDate:
+        type: "string"
+        format: "date-time"
+        description: "Date-time (yyyy-MM-dd'T'HH:mm:ssXXX) when the message will expire\
+          \ in the ebox."
+      readStatus:
+        type: "boolean"
+        description: "Indicates whether or not the main content of the message has already been opened."
+        default: false
+      visible:
+        type: "boolean"
+        description: "Indication whether or not the message is visible or not."
+        default: true
+  MessagesStatusList:
+    type: "array"
+    items:
+      $ref: "#/definitions/MessageStatus"
+  PaymentData:
+    type: "object"
+    required:
+    - "amount"
+    - "currency"
+    - "iban"
+    - "paymentDataId"
+    - "vatAmount"
+    - "dueDate"
+    properties:
+      paymentDataId:
+        type: "string"
+        description: "Identifier of the paymentData"
+      amount:
+        type: "number"
+        format: "double"
+        description: "Amount that needs to be paid, vat not included"
+      vatAmount:
+        type: "number"
+        format: "double"
+        description: "Amount of the vat, to be added to the base amount when applicable"
+      currency:
+        type: "string"
+        description: "Currency in which the amount must be paid, following ISO 4217"
+      dueDate:
+        type: "string"
+        format: "date-time"
+        description: "Date on which the payment needs to be fulfilled"
+      iban:
+        type: "string"
+        description: "Bank account on which the amount must be paid, following ISO\
+          \ 13616:2007"
+      bic:
+        type: "string"
+        description: "Bank Identifier Code"
+      reference:
+        type: "object"
+        description: "Reference added to the payment"
+    description: "Data concerning payments"
+  SenderApplication:
+    type: "object"
+    required:
+    - "applicationId"
+    - "applicationName"
+    properties:
+      applicationId:
+        type: "string"
+        description: "Identifier of the senderApplication"
+      applicationName:
+        description: "Common type defined to provide a string value for each supported\
+          \ language among nl, fr, de"
+        $ref: "#/definitions/TranslatedString"
+      applicationDescription:
+        description: "Common type defined to provide a string value for each supported\
+          \ language among nl, fr, de"
+        $ref: "#/definitions/TranslatedString"
+      applicationLogos:
+        type: "array"
+        description: "Logo(s) used to represent the application, visible to the end user"
+        items:
+          $ref: "#/definitions/Image"
+      applicationUrl:
+        description: "Common type defined to provide a string value for each supported\
+          \ language among nl, fr, de"
+        $ref: "#/definitions/TranslatedString"
+      senderOrganizationIds:
+        type: "array"
+        description: "Array of senderOrganisationIds that are allowed to publish messages\
+          \ emitted by this application"
+        items:
+          type: "string"
+      messageTypeIds:
+        type: "array"
+        description: "Array of messageTypeIds that can be published by this application"
+        items:
+          type: "string"
+      contactBusiness:
+        type: "string"
+        description: "Contact informations (webform, phone, email...) that a user\
+          \ could use to ask a business question. No nominative contact reference, only helpdesk"
+      contactTechnical:
+        type: "string"
+        description: "Contact data to join the technical team responsible for this\
+          \ application (not to used by the end users). No nominative contact reference, only helpdesk"
+    description: "SenderApplication represents an application (online service) that\
+      \ sends messages to the enterprise."
+  SenderApplications:
+    type: "object"
+    properties:
+      items:
+        type: "array"
+        items:
+          $ref: "#/definitions/SenderApplication"
+      totalItems:
+        type: "integer"
+        format: "int32"
+    description: "A paged list of senderApplications. SenderApplications\
+      \ are the different applications (online services...) that send messages to\
+      \ enterprises."
+  SenderOrganization:
+    type: "object"
+    required:
+    - "organizationId"
+    - "organizationShortName"
+    properties:
+      organizationId:
+        type: "string"
+        example: "0406798006"
+        description: "Enterprise number (BCE - KBO number) of the sender organisation"
+        pattern: "[0-1][0-9]{9}"
+      organizationShortName:
+        description: "Common type defined to provide a string value for each supported\
+          \ language among nl, fr, de"
+        $ref: "#/definitions/TranslatedString"
+      organizationLongName:
+        description: "Common type defined to provide a string value for each supported\
+          \ language among nl, fr, de"
+        $ref: "#/definitions/TranslatedString"
+      organizationLogos:
+        type: "array"
+        description: "Logo(s) used to represent the organization, visible to the end\
+          \ user"
+        items:
+          $ref: "#/definitions/Image"
+      organizationUrl:
+        description: "Common type defined to provide a string value for each supported\
+          \ language among nl, fr, de"
+        $ref: "#/definitions/TranslatedString"
+      senderApplicationIds:
+        type: "array"
+        description: "Array of senderApplications for which the senderOrganization\
+          \ can publish messages"
+        items:
+          type: "string"
+      messageTypeIds:
+        type: "array"
+        description: "Array of messageTypeIds for which the senderOrganization can\
+          \ publish messages"
+        items:
+          type: "string"
+      contactBusiness:
+        type: "string"
+        description: "Contact informations (webform, phone, email...) that a user\
+          \ could use to ask a business question. No nominative contact reference, only helpdesk"
+      contactTechnical:
+        type: "string"
+        description: "Contact data to join the technical team responsible for this\
+          \ organization (not to used by the end users).No nominative contact reference, only helpdesk"
+    description: "SenderOrganization represents an organization (institution, company...)\
+      \ that can publish messages for enterprises."
+  SenderOrganizations:
+    type: "object"
+    properties:
+      items:
+        type: "array"
+        items:
+          $ref: "#/definitions/SenderOrganization"
+      totalItems:
+        type: "integer"
+        format: "int32"
+    description: "A paged list of senderOrganizations. SenderOrganizations\
+      \ are the different organizations (institutions, companies...) that send messages\
+      \ to enterprises."
+  PublicationStatusMessage:
+    type: "object"
+    required:
+      - messageId
+      - expirationDate
+    properties:
+      messageId:
+        type: "string"
+        description: "Identifier of a message"
+      expirationDate:
+        type: "string"
+        format: "date-time"
+        description: "Date-time (yyyy-MM-dd'T'HH:mm:ssXXX) when the message will expire\
+          \ in the ebox."
+      code:
+        type: "string"
+        description: "Business Code"
+      message:
+        type: "string"
+        description: "Business Code Description"
+  StatusMessage:
+    type: "object"
+    required:
+    - "code"
+    - "id"
+    - "message"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+      code:
+        type: "string"
+      message:
+        type: "string"
+      contact:
+        type: "string"
+        description: "no nominative contact reference, it must contain only e.g. HELP DESK/SUPPORT line emails"
+      environment:
+        type: "string"
+        enum:
+        - "development"
+        - "test"
+        - "integration"
+        - "acceptation"
+        - "simulation"
+        - "production"
+    description: "A representation of a generic error message"
+  TranslatedString:
+    type: "object"
+    properties:
+      nl:
+        type: "string"
+      fr:
+        type: "string"
+      de:
+        type: "string"
+    description: "Common type defined to provide a string value for each supported\
+      \ language among nl, fr, de"
+  ValidityPeriod:
+    type: "object"
+    required:
+    - "validityPeriodNumber"
+    - "validityPeriodUnit"
+    properties:
+      validityPeriodNumber:
+        type: "integer"
+        format: "int32"
+        description: "Number of validityPeriodUnits"
+      validityPeriodUnit:
+        type: "string"
+        description: "Period unit used for the definition of the validationPeriod"
+        enum:
+        - "day"
+        - "month"
+        - "year"
+    description: "Validity period of the messageType, indicating when messages of\
+      \ this type expire and are no longer available"
+  ForTheAttentionOf:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      type:
+        type: "string"
+      name:
+        type: "string"

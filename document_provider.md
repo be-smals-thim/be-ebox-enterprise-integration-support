@@ -1,5 +1,16 @@
 # Becoming a Document Provider
 
+A Document Provider is the strongest eBox integration that can be made as it allows to offer eBox features to Users be it Senders or Consumers. As such it is also the most challenging requiring integration to setup a REST Web Service that will integrate with several other Web Services.
+
+The Document Provider has some responsability toward te overall eBox enterprise fedreation:
+- Provide a Service which matches the eBox Enterprise SLA in terms of availability, security and performance
+- Store User document with the adequate confidenciality
+- Inform the eBox Federation of eBox activities like new messages or messages being read.
+- Follow latest guidelines to ensure safeguard the end user experience.
+
+# Message Registry Service
+
+In order to be a Document Provider one MUST implement a Message Registry Service and Register that service on the Provider Registry Service. This service MUST follow the [eBox Message Registry open api Spec](openapi/ebox-rest-2.1.yaml)
 
 ## Introspect of an eBox Enterprise Oauth Token
 
