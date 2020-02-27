@@ -28,7 +28,7 @@ the user.
 
 The following events must be sent in the following scenarios:
 
-- newDocument: This event MUST be sent when a new %essage arrives in the eBox
+- newDocument: This event MUST be sent when a new Message arrives in the eBox
 - newDocumentReminder: This event MUST be sent when the Message has not been read 15 days after it has been published
 - documentExpirationAlert: This event MUST be sent 7 days prior to the Message expiring only if the document has not been read yet
 - readDocument: This event MUST be sent when the main Document is read for the first time
@@ -62,7 +62,7 @@ There are two use cases for eBox preferences
 1) You implement the /publishMessage endpoint of a DP. In this case you should call eBox Preferences in order to know whether the user already has an eBox or not. If he does not have an eBox a special status code need to be sent in the reply.
 2) You want to know if someone is using his eBox in order to decide on whether to send via messages via eBox or via Paper. This use case mostly applies to Document senders.
 
-### Tehcnical information
+### Technical information
 
 - [Federation WS Open Api 2 Spec](openapi/ebox-federation-1.3.yaml)
 - ACC URL: https://services-acpt.socialsecurity.be/REST/ebox/enterprise/federation/v1/  
