@@ -58,6 +58,19 @@ This code allows the Document Sender to know that the publication he just made w
 
 This is the preferred method for a Sender to determine if the User uses his e-Box or not. An alternative to this is to use the [e-Box Federation WS]() but this requires to integrate with annother web service and does not fit the "e-Box First" philosophy we are trying to push. 
 
+### For the attention of
+
+If the publication is for the attention of a particular person, a ``ForTheAttentionOf`` object has to be added in the ``messageToPublish``.
+Example:
+```json
+        "forTheAttentionOf": {
+          "type": "person",
+          "id": "84022711080",
+          "name": "John Doe"
+        }
+```
+The ``type`` is used to determine if the attention is for a person or a group of person. For the moment, only ``"person"`` is suported. The ``id`` property is the National Register Number.
+
 ## Getting an Oauth Token for publication
 
 The [oauth introspect example](../examples/ouath-introspect) shows how an Oauth token can be retrieved. 
