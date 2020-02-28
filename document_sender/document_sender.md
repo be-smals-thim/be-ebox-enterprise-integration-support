@@ -1,8 +1,8 @@
 # Becoming a Document Sender
 
-Publication happen through the ```/publishMessage``` method of the [eBox Document Provider API](../openapi/ebox-rest-2.1.yaml)
+Publication happen through the ```/publishMessage``` method of the [e-Box Document Provider API](../openapi/ebox-rest-2.1.yaml)
 
-The method uses a multipart HTTP POST to send up to 6 documents attached to a an eBox Message. The API [fully support end to end streaming](#End to end Streaming Considerations).
+The method uses a multipart HTTP POST to send up to 6 documents attached to a an e-Box Message. The API [fully support end to end streaming](#End to end Streaming Considerations).
 
 ## Minimal publication example
 
@@ -54,9 +54,9 @@ Provided that the request is correct one can expect a ``201`` status code to be 
 
 ### NO_DIGITAL_USER response code
 
-This code allows the Document Sender to know that the publication he just made was to a recipient that never visited his eBox. 
+This code allows the Document Sender to know that the publication he just made was to a recipient that never visited his e-Box. 
 
-This is the preferred method for a Sender to determine if the User uses his eBox or not. An alternative to this is to use the [eBox Federation WS]() but this requires to integrate with annother web service and does not fit the "eBox First" philosophy we are trying to push. 
+This is the preferred method for a Sender to determine if the User uses his e-Box or not. An alternative to this is to use the [e-Box Federation WS]() but this requires to integrate with annother web service and does not fit the "e-Box First" philosophy we are trying to push. 
 
 ## Getting an Oauth Token for publication
 

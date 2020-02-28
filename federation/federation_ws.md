@@ -2,20 +2,20 @@
 
 The Federation WS allows to 
 - Know the list of Document Providers
-- Know the preferences of a particular eBox (enterprise)
+- Know the preferences of a particular e-Box (enterprise)
 
-A ``POST /eboxPreferences/search``call allows to know whether the enterprise has opt for receiving his messages exclusively in eBox or when he visited his eBox for the last time. 
+A ``POST /eboxPreferences/search``call allows to know whether the enterprise has opt for receiving his messages exclusively in e-Box or when he visited his e-Box for the last time. 
 
-The same call will in the future provide indicative information about the number of messages and unread messages that are available in the eBox.
+The same call will in the future provide indicative information about the number of messages and unread messages that are available in the e-Box.
 
 ``PATCH /eboxPreferences`` is not supported for the DP use case.
 
-### What are eBox preferences for?
+### What are e-Box preferences for?
 
-There are two use cases for eBox preferences
+There are two use cases for e-Box preferences
 
-1) You implement the /publishMessage endpoint of a DP. In this case you should call eBox Preferences in order to know whether the user already has an eBox or not. If he does not have an eBox a special status code need to be sent in the reply.
-2) You want to know if someone is using his eBox in order to decide on whether to send via messages via eBox or via Paper. This use case mostly applies to Document senders.
+1) You implement the /publishMessage endpoint of a DP. In this case you should call e-Box Preferences in order to know whether the user already has an e-Box or not. If he does not have an e-Box a special status code need to be sent in the reply.
+2) You want to know if someone is using his e-Box in order to decide on whether to send via messages via e-Box or via Paper. This use case mostly applies to Document senders.
 
 
 ### Technical information

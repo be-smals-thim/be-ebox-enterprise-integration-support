@@ -1,12 +1,12 @@
 # Becoming a Document Provider
 
-A Document Provider is the strongest eBox integration that can be made as it allows to offer eBox features to Users be it Senders or Consumers. As such it is also the most challenging, requiring integration to setup a REST Web Service that will integrate with several other Web Services of the federation.
+A Document Provider is the strongest e-Box integration that can be made as it allows to offer e-Box features to Users be it Senders or Consumers. As such it is also the most challenging, requiring integration to setup a REST Web Service that will integrate with several other Web Services of the federation.
 
-The Document Provider has some responsibilities toward te overall eBox enterprise federation:
+The Document Provider has some responsibilities toward te overall e-Box enterprise federation:
 
-- Provide a Service which matches the eBox Enterprise SLA in terms of availability, security and performance
+- Provide a Service which matches the e-Box Enterprise SLA in terms of availability, security and performance
 - Store User document with the adequate confidentiality
-- Inform the eBox Federation of eBox activities like new messages or messages being read.
+- Inform the e-Box Federation of e-Box activities like new messages or messages being read.
 - Follow latest guidelines to ensure safeguard the end user experience. 
 
 # Message Registry Service
@@ -22,12 +22,12 @@ The Consultation part is required to be considered a Document Provider while the
 
 In order to notify users of any new, unread or soon to be expire messages, an integration with the EES Enterprise is required.
 
-The EES or eBox Event Service is a system which allows Document Providers to send Events to HIP's so that the HIP can notify
+The EES or e-Box Event Service is a system which allows Document Providers to send Events to HIP's so that the HIP can notify
 the user. 
 
 The following events must be sent in the following scenarios:
 
-- ``newDocument``: This event MUST be sent when a new Message arrives in the eBox
+- ``newDocument``: This event MUST be sent when a new Message arrives in the e-Box
 - ``newDocumentReminder``: This event MUST be sent when the Message has not been read 15 days after it has been published
 - ``documentExpirationAlert``: This event MUST be sent 7 days prior to the Message expiring only if the document has not been read yet
 - ``readDocument``: This event MUST be sent when the **MAIN** Document is read for the first time

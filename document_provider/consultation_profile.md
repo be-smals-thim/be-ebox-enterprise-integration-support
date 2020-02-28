@@ -2,13 +2,13 @@
 
 # Message Registry Service
 
-In order to be a Document Provider one MUST implement a Message Registry Service and Register that service on the Provider Registry Service. This service MUST follow the [eBox Message Registry open api Spec](../openapi/ebox-rest-2.1.yaml)
+In order to be a Document Provider one MUST implement a Message Registry Service and Register that service on the Provider Registry Service. This service MUST follow the [e-Box Message Registry open api Spec](../openapi/ebox-rest-2.1.yaml)
 
-## Introspect of an eBox Enterprise Oauth Token
+## Introspect of an e-Box Enterprise Oauth Token
 
 The DP methods are secured by Oauth2 tokens. Instropsecting these token can be tricky since they instrospect endpoint security is quite high using oauth itself to secure the call to the ``/introspect`` endpoint.
 
-The introspect endpoint return serveral information the most important being the organization Cbe which is the unique identifier of an organization and of it's eBox.
+The introspect endpoint return serveral information the most important being the organization Cbe which is the unique identifier of an organization and of it's e-Box.
 
 Here is an example introspect payload.
 
@@ -40,7 +40,7 @@ Proper Oauth2 treatment of the token will not be described here as it is done ou
 
 - ``active`` needs to be checked, if false the token is not acceptable
 - ``scope`` need to be checked based on the endpoint 
-- ``principalAttributes[‘urn:be:fgov:kbo-bce:organization:cbe-number’][0]`` contains the CBE number which identifies the eBox of the user.
+- ``principalAttributes[‘urn:be:fgov:kbo-bce:organization:cbe-number’][0]`` contains the CBE number which identifies the e-Box of the user.
 
 The following resources expand a bit on the subject:
 
@@ -48,7 +48,7 @@ The following resources expand a bit on the subject:
 
 ### Scopes and endpoints mapping
 
-The eBox Enterprise Document Providers endpoints are secured by the following scopes:
+The e-Box Enterprise Document Providers endpoints are secured by the following scopes:
 
 - ``scope:document:management:consult:ws-eboxrestentreprise:summaryownebox``: Give access to the  ``/ebox`` resource of identified user 
 - ``scope:document:management:consult:ws-eboxrestentreprise:summaryallebox``: Give access to the  ``/ebox`` resource of any user. 
@@ -58,7 +58,7 @@ The eBox Enterprise Document Providers endpoints are secured by the following sc
 
 ## Integration with the Portal
 
-The [eBox Enterprise Portal](https://www.eboxenterprise.be) will be the primary consumer of the Document Provider. Usage by the portal has some particularities that are worth nothing.
+The [e-Box Enterprise Portal](https://www.eboxenterprise.be) will be the primary consumer of the Document Provider. Usage by the portal has some particularities that are worth nothing.
 
 ### Resources used by the Portal
 
@@ -67,15 +67,15 @@ From all of the API endpoints, only a few are actually used by the portal.
 - ``/ebox/messages``: This is the main method being used by the Portal. It provides all the information provided by all of it's sub resources making direct calls to sub resources useless or rare.
 - ``/ebox/messages/<id>/attachments/<attachmentId>/content``: This method is used to get the attached documents
 - ``/ebox/messages/<id>``: This method is used when displaying a message details and is therefore not used allot
-- ``/referenceData/senderApplication/<id>``: This method is called for every single message displayed in eBox.
-- ``/referenceData/senderOrganization/<id>``: This method is called for every single message displayed in eBox.
-- ``/referenceData/messageType/<id>``: This method is called for every single message displayed in eBox.
+- ``/referenceData/senderApplication/<id>``: This method is called for every single message displayed in e-Box.
+- ``/referenceData/senderOrganization/<id>``: This method is called for every single message displayed in e-Box.
+- ``/referenceData/messageType/<id>``: This method is called for every single message displayed in e-Box.
 
 **Note:** Integration to portal in ACC is allowed when this minimal set of resources has been implemented.
 
 ### HTTP Cache headers guidelines
 
-In order to offer the best possible user experience cache control headers MUST be used on some the ``/referneceData/**`` endpoints. These endpoints are heavily used by the eBox Enterprise UI which itself does not use caching so to not impose latency in data updates on the DP. 
+In order to offer the best possible user experience cache control headers MUST be used on some the ``/referneceData/**`` endpoints. These endpoints are heavily used by the e-Box Enterprise UI which itself does not use caching so to not impose latency in data updates on the DP. 
 
 The following endpoints are MUST have significant cache control headers. 
 
@@ -96,7 +96,7 @@ However for proper integration with the portal, all 3 values must be provided. I
 
 ## Message List endpoint
 
-The Message List endpoint is the single most important endpoint of eBox.
+The Message List endpoint is the single most important endpoint of e-Box.
 It gives access to all information of all Messages with the notable exception of the attachments binary content.
 
 ### Text search feature
