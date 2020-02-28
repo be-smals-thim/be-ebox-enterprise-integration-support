@@ -10,4 +10,3 @@ The publication method needs to support any HTTP part order. One cannot expect f
  The ``messageToPublish`` can contain ``SHA-256`` digests of the published documents. This means that the Document Sender might need to compute it. Computation of the digest requires to fully read the documents streams. 
  
  In an end to end scenarios, the digest computation must occur during HTTP transfer to the Document Provider. The ``messageToPublish`` digests values cannot be known to the Document Sender before the Documents are fully sent to the Document Provider and the ``messageToPublish`` part can only be specified as last part of the exchange.
-  
