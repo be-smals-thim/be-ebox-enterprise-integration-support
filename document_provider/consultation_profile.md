@@ -1,29 +1,68 @@
-# Becoming a Document Provider
 
-A Document Provider is the strongest eBox integration that can be made as it allows to offer eBox features to Users be it Senders or Consumers. As such it is also the most challenging requiring integration to setup a REST Web Service that will integrate with several other Web Services.
-
-The Document Provider has some responsability toward te overall eBox enterprise fedreation:
-- Provide a Service which matches the eBox Enterprise SLA in terms of availability, security and performance
-- Store User document with the adequate confidenciality
-- Inform the eBox Federation of eBox activities like new messages or messages being read.
-- Follow latest guidelines to ensure safeguard the end user experience.
 
 # Message Registry Service
 
-In order to be a Document Provider one MUST implement a Message Registry Service and Register that service on the Provider Registry Service. This service MUST follow the [eBox Message Registry open api Spec](openapi/ebox-rest-2.1.yaml)
+In order to be a Document Provider one MUST implement a Message Registry Service and Register that service on the Provider Registry Service. This service MUST follow the [eBox Message Registry open api Spec](../openapi/ebox-rest-2.1.yaml)
 
 ## Introspect of an eBox Enterprise Oauth Token
 
 The DP methods are secured by Oauth2 tokens. Instropsecting these token can be tricky since they instrospect endpoint security is quite high using oauth itself to secure the call to the ``/introspect`` endpoint.
 
-- [Java Example of an Introspect](examples/ouath-introspect)
+The introspect endpoint return serveral information the most important being the organization Cbe which is the unique identifier of an organization and of it's eBox.
+
+Here is an example introspect payload.
+
+```json
+{
+    "active": true,
+    "client_id": "my:ebox:enterprise:dp:client",
+    "token_type": "access_token",
+    "sub": "79072300048",
+    "aud": "oauth:sanitycheck:public:client",
+    "iss": "oauth-acpt.socialsecurity.be",
+    "jti": "i1v18l327gktaad04vuetqnrso",
+    "principalAttributes": {
+        ...
+        "urn:be:fgov:kbo-bce:organization:cbe-number": [
+                        "0406798006"
+                        ],
+        ...
+
+    },
+    "iat": 1563882772,
+    "exp": 1571658772,
+    "nbf": 1563882712,
+    "scope": "openid profile"
+}
+```
+
+Proper Oauth2 treatment of the token will not be described here as it is done out of the box by most Oauth client and is documented in the Oauth Specification. However here are some pointers
+
+- ``active`` needs to be checked, if false the token is not acceptable
+- ``scope`` need to be checked based on the endpoint 
+- ``principalAttributes[‘urn:be:fgov:kbo-bce:organization:cbe-number’][0]`` contains the CBE number which identifies the eBox of the user.
+
+The following resources expand a bit on the subject:
+
+- [Java Example of an Introspect](../examples/ouath-introspect)
+
+### Scopes and endpoints mapping
+
+The eBox Enterprise Document Providers endpoints are secured by the following scopes:
+
+- ``scope:document:management:consult:ws-eboxrestentreprise:summaryownebox``: Give access to the  ``/ebox`` resource of identified user 
+- ``scope:document:management:consult:ws-eboxrestentreprise:summaryallebox``: Give access to the  ``/ebox`` resource of any user. 
+- ``scope:document:management:consult:ws-eboxrestentreprise:messagesfull``: Give access to the  ``/ebox/message`` and ``/ebox/message/**`` resource of identified user.
+- ``scope:document:management:consult:ws-eboxrestentreprise:referencedata``: Give access to the  ``/referenceData/**`` resources.
+ 
+
 
 
 ## EES Enterprise integration
 
 In order to notify users of any new, unread or soon to be expire messages, an integration with the EES Enterprise is required.
 
-The EES or Ebox Event Service is a system which allows Document Providers to send Events to HIP's so that the HIP can notify
+The EES or eBox Event Service is a system which allows Document Providers to send Events to HIP's so that the HIP can notify
 the user. 
 
 The following events must be sent in the following scenarios:
@@ -35,13 +74,13 @@ The following events must be sent in the following scenarios:
 
 ### What are Notifications
 
-Notifications are eMail that are sent once per day with a summary of the event's recieved. The readDocument event is here
+Notifications are eMail that are sent once per day with a summary of the event's received. The readDocument event is here
 to prevent us sending Notifications about Messages that have been read by the User between the time the unread message 
 Event was sent and the time the time the Notification is sent to the User.
 
 ### Technical Information
 
-- [EEES Open Api 2 Spec](openapi/ebox-enterprise-event-api-1.1.1.yaml)
+- [EEES Open Api 2 Spec](../openapi/ebox-enterprise-event-api-1.1.1.yaml)
 
 ## Enterprise Federation WS
 
@@ -49,7 +88,7 @@ The Federation WS allows to
 - Know the list of Document Providers
 - Know the preferences of a particular eBox (enterprise)
 
-A ``POST /eboxPreferences/search``call allows to know whether the enterprise has opt for recieving his messages exclusivly in eBox or when he visited his eBox for the last time. 
+A ``POST /eboxPreferences/search``call allows to know whether the enterprise has opt for receiving his messages exclusively in eBox or when he visited his eBox for the last time. 
 
 The same call will in the future provide indicative information about the number of messages and unread messages that are available in the eBox.
 
@@ -64,7 +103,7 @@ There are two use cases for eBox preferences
 
 ### Technical information
 
-- [Federation WS Open Api 2 Spec](openapi/ebox-federation-1.3.yaml)
+- [Federation WS Open Api 2 Spec](../openapi/ebox-federation-1.3.yaml)
 - ACC URL: https://services-acpt.socialsecurity.be/REST/ebox/enterprise/federation/v1/  
 - PRD URL:  https://services.socialsecurity.be/REST/ebox/enterprise/federation/v1
 
