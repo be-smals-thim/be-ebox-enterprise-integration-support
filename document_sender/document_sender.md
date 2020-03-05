@@ -1,8 +1,10 @@
 # Becoming a Document Sender
 
+[Document Sender onboarding process](onboarding_process.md)
+
 Publication happen through the ```/publishMessage``` method of the [e-Box Document Provider API](../openapi/ebox-rest-2.1.yaml)
 
-The method uses a multipart HTTP POST to send up to 6 documents attached to a an e-Box Message. The API [fully support end to end streaming](#EndToEndStreamingConsiderations).
+The method uses a multipart HTTP POST to send up to 6 documents attached to a an e-Box Message. The API fully support [end to end streaming](#EndToEndStreamingConsiderations).
 
 ## Minimal publication example
 

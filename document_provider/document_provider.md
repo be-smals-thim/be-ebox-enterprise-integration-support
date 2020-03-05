@@ -7,9 +7,11 @@ The Document Provider has some responsibilities toward te overall e-Box enterpri
 - Provide a Service which matches the e-Box Enterprise Service Level Agreement (SLA) in terms of availability, security and performance
 - Store User document with the adequate confidentiality
 - Inform the e-Box Federation of e-Box activities like new messages or messages being read.
-- Follow latest guidelines to ensure safeguard the end user experience. 
+- Follow latest guidelines to ensure safeguard the end user experience.
 
-# Message Registry Service
+[Document Provider onboarding process](onboarding_process.md)
+
+# <a id="MessageRegistryService"></a>Message Registry Service
 
 The Message Registry Service is the most important part of the Document Provider. There are two main levels of service that a Document Provider can offer.
 
