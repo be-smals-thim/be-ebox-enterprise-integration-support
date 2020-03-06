@@ -17,7 +17,7 @@ A formal request must be submitted via a dedicated form in order to become a new
 The eBoxIntegration team is responsible for technically validating the received form. A formal validation of the NSSO is confirmed at this stage. Once validated, the form is sent back to you.
 
 ## Order your X.509 certificate
-In order to call the e-Box Publication service, you will need a [X.509 certificate](). Please pay attention to respect the expected format. It’s also important to have a distinct certificate for each work environment (Acceptance, Production).
+In order to call the e-Box Publication service, you will need a [X.509 certificate](../common/x509_certificate.md). Please pay attention to respect the expected format. It’s also important to have a distinct certificate for each work environment (Acceptance, Production).
 
 ## Configuration by e-Box team
 The e-Box team will take care of the different configurations needed, which differs if it is the first integration or not, as well as authorization requests in the appropriate environment. An email will be sent to you as soon as the configuration is ready to be used.
