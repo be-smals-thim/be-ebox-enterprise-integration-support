@@ -1,17 +1,19 @@
 # Becoming a Document Provider
 
-A Document Provider is the strongest e-Box integration that can be made as it allows to offer e-Box features to Users be it Senders or Consumers. As such it is also the most challenging, requiring integration to setup a REST Web Service that will integrate with several other Web Services of the federation.
+A Document Provider is the strongest e-Box integration that can be made as it allows to offer e-Box features to Users be it Senders or Consumers. As such it is also the most challenging, requiring [integration to setup a REST Web Service](../openapi/ebox-rest-2.1.yaml) that will integrate with several other Web Services of the federation.
 
 The Document Provider has some responsibilities toward te overall e-Box enterprise federation:
 
-- Provide a Service which matches the e-Box Enterprise SLA in terms of availability, security and performance
+- Provide a Service which matches the e-Box Enterprise Service Level Agreement (SLA) in terms of availability, security and performance
 - Store User document with the adequate confidentiality
 - Inform the e-Box Federation of e-Box activities like new messages or messages being read.
-- Follow latest guidelines to ensure safeguard the end user experience. 
+- Follow latest guidelines to ensure safeguard the end user experience.
 
-# Message Registry Service
+[Document Provider onboarding process](onboarding_process.md)
 
-The Message Registry Service is the most important part of the Document Provider. There two main level of service that a Document Provider can offer.
+# <a id="MessageRegistryService"></a>Message Registry Service
+
+The Message Registry Service is the most important part of the Document Provider. There are two main levels of service that a Document Provider can offer.
 
 - [Consultation](consultation_profile.md): Only implement the Consultation parts of the API. This allows to expose messages to the Document Consumers
 - Publication: Also implement the Publication parts of the API. Allowing replies to messages and new publication being done through a standardized method.
@@ -20,10 +22,9 @@ The Consultation part is required to be considered a Document Provider while the
 
 # Notifications
 
-In order to notify users of any new, unread or soon to be expire messages, an integration with the EES Enterprise is required.
+In order to notify users of any new, unread or soon to be expire messages, an integration with the *Ebox Event Service* (EES) Enterprise is required.
 
-The EES or e-Box Event Service is a system which allows Document Providers to send Events to HIP's so that the HIP can notify
-the user. 
+The EES  is a system which allows Document Providers to send Events to *Human Interface provider*'s (HIP) so that the HIP can notify the user. 
 
 The following events must be sent in the following scenarios:
 
@@ -36,4 +37,4 @@ The following events must be sent in the following scenarios:
 
 Notifications are eMail that are sent once per day with a summary of the event's received. The readDocument event is here
 to prevent us sending Notifications about Messages that have been read by the User between the time the unread message 
-Event was sent and the time the time the Notification is sent to the User.
+Event was sent and the time the Notification is sent to the User.
