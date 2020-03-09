@@ -1,8 +1,10 @@
-## Enterprise Federation WS
+# Enterprise Federation WS
 
 The Federation WS allows to 
 - Know the list of Document Providers
 - Know the preferences of a particular e-Box (enterprise)
+
+## Search Ebox Preferences
 
 A ``POST /eboxPreferences/search``call allows to know whether the enterprise has opt for receiving his messages exclusively in e-Box or when he visited his e-Box for the last time. 
 
@@ -10,7 +12,27 @@ The same call will in the future provide indicative information about the number
 
 ``PATCH /eboxPreferences`` is not supported for the DP use case.
 
-### What are e-Box preferences for?
+### Example:
+
+- Request: ``POST /eboxPreferences/search`` with json body
+
+```json
+{
+    "eboxType": "ENTERPRISE",
+    "eboxIdType": "EnterpriseNumber",
+    "eboxIdValueList": ["0474028805","0212148896","0800002352"]
+}
+```
+
+- Response: 200 HTTP status with body
+ ```json
+ 
+ ```
+
+
+
+
+## What are e-Box preferences for?
 
 There are two use cases for e-Box preferences
 
@@ -18,7 +40,8 @@ There are two use cases for e-Box preferences
 2) You want to know if someone is using his e-Box in order to decide on whether to send via messages via e-Box or via Paper. This use case mostly applies to Document senders.
 
 
-### Technical information
+
+## Technical information
 
 - [Federation WS Open Api 2 Spec](../openapi/ebox-federation-1.3.yaml)
 - ACC URL: https://services-acpt.socialsecurity.be/REST/ebox/enterprise/federation/v1/  
