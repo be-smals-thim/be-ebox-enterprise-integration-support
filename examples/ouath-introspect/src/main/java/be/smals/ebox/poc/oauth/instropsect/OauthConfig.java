@@ -7,7 +7,7 @@ public class OauthConfig {
     private String password;
     private String aliasPassword;
     private String keyFileLocation;
-    private String clientUrn;
+    private String clientId;
 
     public String getAlias() {
         return alias;
@@ -45,12 +45,12 @@ public class OauthConfig {
         return this;
     }
 
-    public String getClientUrn() {
-        return clientUrn;
+    public String getClientId() {
+        return clientId;
     }
 
-    public OauthConfig setClientUrn(String clientUrn) {
-        this.clientUrn = clientUrn;
+    public OauthConfig setClientId(String clientUrn) {
+        this.clientId = clientUrn;
         return this;
     }
 
@@ -63,12 +63,12 @@ public class OauthConfig {
                 Objects.equals(password, that.password) &&
                 Objects.equals(aliasPassword, that.aliasPassword) &&
                 Objects.equals(keyFileLocation, that.keyFileLocation) &&
-                Objects.equals(clientUrn, that.clientUrn);
+                Objects.equals(clientId, that.clientId);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(alias, password, aliasPassword, keyFileLocation, clientUrn);
+        return Objects.hash(alias, password, aliasPassword, keyFileLocation, clientId);
     }
 }

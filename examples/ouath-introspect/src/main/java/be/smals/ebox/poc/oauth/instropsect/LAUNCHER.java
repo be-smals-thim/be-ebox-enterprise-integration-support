@@ -24,7 +24,7 @@ public class LAUNCHER {
                         .setPassword("<p12 password>")
                         .setAlias("<alias in the .p12>") // e.g. documentmanagement:publication:ebox
                         .setAliasPassword("<p12 alias password>")
-                        .setClientUrn("<oauth client urn>"); // e.g. documentmanagement:publication:ebox:client
+                        .setClientId("<oauth client urn>"); // e.g. documentmanagement:publication:ebox:client
             }
 
             @Override
@@ -38,7 +38,7 @@ public class LAUNCHER {
                         .setPassword("<p12 password>")
                         .setAlias("<alias in the .p12>") // e.g. documentmanagement:publication:ebox
                         .setAliasPassword("<p12 alias password>")
-                        .setClientUrn("<oauth client urn>"); // e.g. documentmanagement:publication:ebox:client
+                        .setClientId("<oauth client urn>"); // e.g. documentmanagement:publication:ebox:client
 
             }
         };
