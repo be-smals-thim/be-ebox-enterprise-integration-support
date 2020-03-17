@@ -14,7 +14,8 @@ This step is optional but often very useful in order to answer any questions bef
 In order to officially become a new DocProvider, please send the following documents to [eBoxIntegration@smals.be](mailto:eBoxIntegration@smals.be):
 - e-Box DocProvider onboarding form & contract (the contract must be signed by a Legal Representative from your organization);
 - The public part of your certificate;
-If you need to order a [X.509 certificate](../common/x509_certificate.md), please pay attention to respect the expected format. Once completed, the form must be sent.
+If you need to order a [X.509 certificate](../common/x509_certificate.md) to [QuoVadis](mailto:info.be@quovadisglobal.com), please pay attention to respect the expected format.
+Once completed, the form must be sent.
 
 ## Request validation & configuration (ACC)
 The eBoxIntegration team is responsible for technically validating the received form. A formal validation of the NSSO is confirmed at this stage. The onboarding with the OAuth2 Authorization Server is managed by our technical teams, based on the information you sent. 
