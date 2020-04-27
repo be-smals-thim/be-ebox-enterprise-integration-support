@@ -9,31 +9,29 @@ The method uses a multipart HTTP POST to send up to 6 documents attached to a an
 ## Minimal publication example
 
 The following is pretty much the simplest publication request that can be made. It is comprised of the following HTTP parts 
-1) ``messageToPublish``: This part contains the meta information of the message
-
+1) ``messageToPublish``: This part contains the meta information of the message.
+Example:
 ```json
-{
-      "messageToPublish": {
-        "recipient": {
-          "eboxType": "enterprise",
-          "eboxIdValue": "0454079368"
-        },
-        "subject": {
-          "fr": "ik ben"
-        },
-        "messageTypeId": "TEST_PILOT_5_ENTERPRISE",
-        "senderOrganizationId": "0220916609",
-        "senderApplicationId": "document:management:consult:ws-eboxrestentreprise:0220916609",
-        "attachments": [
-            {
-              "httpPartName": "upfile1",
-              "mainContent": true,
-              "attachmentSigned": false
-            }
-        ],
-        "bodyMainContent": false,
-        "replyAuthorized": false
-      }
+messageToPublish: {
+    "recipient": {
+      "eboxType": "enterprise",
+      "eboxIdValue": "0454079368"
+    },
+    "subject": {
+      "fr": "ik ben"
+    },
+    "messageTypeId": "TEST_PILOT_5_ENTERPRISE",
+    "senderOrganizationId": "0220916609",
+    "senderApplicationId": "document:management:consult:ws-eboxrestentreprise:0220916609",
+    "attachments": [
+        {
+          "httpPartName": "upfile1",
+          "mainContent": true,
+          "attachmentSigned": false
+        }
+    ],
+    "bodyMainContent": false,
+    "replyAuthorized": false
 }
 ```
 
