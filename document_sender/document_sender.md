@@ -8,8 +8,8 @@ The method uses a multipart HTTP POST to send up to 6 documents attached to a an
 
 ## Not implemented functionalities
 
-- We do not support yet publication with several languages. For the moment, only one among ``fr``, ``nl`` and ``de`` has to be selected in a publication request.
-- ``/linkEboxMessage`` feature is not implemented yet.
+- We do not support yet publication with several languages. For the moment, only one among ``fr``, ``nl`` and ``de`` has to be selected in a publication request for the subject, attachment title, body content and business data values.
+- ``/linkEboxMessage`` feature is not implemented yet but the broadcast feature still available by asking the procedure to [eBoxIntegration@smals.be](mailto:eBoxIntegration@smals.be).
 
 ## Minimal publication example
 
@@ -20,14 +20,14 @@ Example:
 messageToPublish: {
     "recipient": {
       "eboxType": "enterprise",
-      "eboxIdValue": "0454079368"
+      "eboxIdValue": "0123456789"
     },
     "subject": {
       "fr": "Message de test"
     },
-    "messageTypeId": "TEST_PILOT_5_ENTERPRISE",
-    "senderOrganizationId": "0220916609",
-    "senderApplicationId": "document:management:consult:ws-eboxrestentreprise:0220916609",
+    "senderApplicationId": "db2b.SPFETCS-FODWASO.fgov.be",
+    "messageTypeId": "SpfFodSocialElections",
+    "senderOrganizationId": "0123456789",
     "attachments": [
         {
           "httpPartName": "upfile1",
