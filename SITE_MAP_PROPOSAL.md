@@ -1,0 +1,43 @@
+
+- Home
+    - Quick Presentation of eBox
+        - Learn more link to
+    - Integration options highlight
+    - Partners
+- Services
+   ... This section contains a literal explanation of eBox with information needed to decide at a more business level whether eBox will match the need. It is the blabla cool diagram section of the documentation
+   
+- Integration guide
+    - Document Sender
+        - Intro
+        - Onboarding
+        - Oauth integration
+    - Document Consumer
+        - Intro
+        - Onboarding
+        - Oauth Integration
+        - EES Integration
+    - Document Provider
+        - Consultation Profile
+            - Link to document consumer
+            - Implementation Strategy
+            - Oauth integration
+            - EES integration
+            - Audit Trail
+        - Publication Profile
+            - Link to document sender
+            - Implementation Strategy
+            - Resources breakdown
+            - Oauth integration (link to consultation + extra scope info)
+            -
+    - EES
+- Documentation
+- FAQ
+    - When is a message marked as read?
+    - What is registeredMail for?
+    - Why are most field of the EES not required?
+- Blog
+ - Git
+ - Contact
+    
+- Documentation

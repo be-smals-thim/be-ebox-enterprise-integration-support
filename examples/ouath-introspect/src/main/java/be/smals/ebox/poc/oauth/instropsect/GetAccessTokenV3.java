@@ -28,7 +28,7 @@ public class GetAccessTokenV3 {
 
             URI tokenEndpoint = new URI(POC_CONFIG.inst.getOauth2V2TokenEndpoint());
 // The credentials to authenticate the client at the token endpoint
-            ClientID clientID = new ClientID(oauthConfig.getClientUrn());
+            ClientID clientID = new ClientID(oauthConfig.getClientId());
 
             ClientAuthentication clientAuth = new PrivateKeyJWT(clientID,
                     new URI(POC_CONFIG.inst.getAudience()), JWSAlgorithm.RS256, (RSAPrivateKey)key,
