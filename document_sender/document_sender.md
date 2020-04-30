@@ -6,11 +6,6 @@ Publication happen through the ```/publishMessage``` method of the [e-Box Docume
 
 The method uses a multipart HTTP POST to send up to 6 documents attached to a an e-Box Message. The API fully support [end to end streaming](#EndToEndStreamingConsiderations).
 
-## Not implemented functionalities
-
-- We do not support yet publication with several languages. For the moment, only one among ``fr``, ``nl`` and ``de`` has to be selected in a publication request for the subject, attachment title, body content and business data values.
-- ``/linkEboxMessage`` feature is not implemented yet but the broadcast feature still available by asking the procedure to [eBoxIntegration@smals.be](mailto:eBoxIntegration@smals.be).
-
 ## Minimal publication example
 
 The following is pretty much the simplest publication request that can be made. It is comprised of the following HTTP parts 
@@ -87,4 +82,13 @@ Getting a token requires having cleared the oauth part of the onboarding.
 
 ## <a id="EndToEndStreamingConsiderations"></a>End to end Streaming Considerations
 
-The order of HTTP parts is arbitrary, each part being linked to its associated meta-data by the ``httpPartName`` property of the publication payload. This allows for end to end streaming on the Document Sender side. See the [Publication Profile Documentation for more information](../document_provider/publication_profile.md#OrderOfTheHttpParts). 
+The order of HTTP parts is arbitrary, each part being linked to its associated meta-data by the ``httpPartName`` property of the publication payload. This allows for end to end streaming on the Document Sender side. See the [Publication Profile Documentation for more information](../document_provider/publication_profile.md#OrderOfTheHttpParts).
+
+## Our implementation choices
+
+There are some restrictions in our implementation of the service:
+- We do not support publication with several languages. Only one among ``fr``, ``nl`` and ``de`` has to be selected in a publication request for the subject, attachment title, body content and business data values.
+- ``/linkEboxMessage`` feature is not implemented but the broadcast feature still available by asking the procedure to [eBoxIntegration@smals.be](mailto:eBoxIntegration@smals.be).
+- We do not support dynamic expiration date. That is to say, in the API about the ``messageToPublish`` object, the ``expirationDate`` field is not supported. The expiration date will be calculated from the current date plus the validity period defined for the message type. You can see the ``validityPeriod`` by doing a GET on ``<endpoint>/referenceData/messageTypes/<messageType-ID>``
+- The business data put in a ``messageToPublish`` can only be those defined for the message type created during the Onboarding process.
+- The ``originalMessageId`` in the ``messageToPublish`` object is only supported in the case of a reply. The value to put is the ID of the message to reply.
