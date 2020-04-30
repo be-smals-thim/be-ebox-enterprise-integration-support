@@ -24,10 +24,6 @@ The same call will in the future provide indicative information about the number
 }
 ```
 
-- Response: 200 HTTP status with body
- ```json
- 
- ```
 
 
 
