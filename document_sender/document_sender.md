@@ -2,38 +2,41 @@
 
 [Document Sender onboarding process](onboarding_process.md)
 
-Publication happen through the ```/publishMessage``` method of the [e-Box Document Provider API](../openapi/ebox-rest-2.1.yaml)
+Publication happen through the ```/publishMessage``` method of the [e-Box Document Provider API](https://info.eboxenterprise.be/fr/documents/zip/e-Box-Enterprise-swagger-v2.1-AP-Public.zip)
 
 The method uses a multipart HTTP POST to send up to 6 documents attached to a an e-Box Message. The API fully support [end to end streaming](#EndToEndStreamingConsiderations).
+
+## Not implemented functionalities
+
+- We do not support yet publication with several languages. For the moment, only one among ``fr``, ``nl`` and ``de`` has to be selected in a publication request for the subject, attachment title, body content and business data values.
+- ``/linkEboxMessage`` feature is not implemented yet but the broadcast feature still available by asking the procedure to [eBoxIntegration@smals.be](mailto:eBoxIntegration@smals.be).
 
 ## Minimal publication example
 
 The following is pretty much the simplest publication request that can be made. It is comprised of the following HTTP parts 
-1) ``messageToPublish``: This part contains the meta information of the message
-
+1) ``messageToPublish``: This part contains the meta information of the message.
+Example:
 ```json
-{
-      "messageToPublish": {
-        "recipient": {
-          "eboxType": "enterprise",
-          "eboxIdValue": "0454079368"
-        },
-        "subject": {
-          "fr": "ik ben"
-        },
-        "messageTypeId": "TEST_PILOT_5_ENTERPRISE",
-        "senderOrganizationId": "0220916609",
-        "senderApplicationId": "document:management:consult:ws-eboxrestentreprise:0220916609",
-        "attachments": [
-            {
-              "httpPartName": "upfile1",
-              "mainContent": true,
-              "attachmentSigned": false
-            }
-        ],
-        "bodyMainContent": false,
-        "replyAuthorized": false
-      }
+messageToPublish: {
+    "recipient": {
+      "eboxType": "enterprise",
+      "eboxIdValue": "0123456789"
+    },
+    "subject": {
+      "fr": "Message de test"
+    },
+    "senderApplicationId": "db2b.SPFETCS-FODWASO.fgov.be",
+    "messageTypeId": "SpfFodSocialElections",
+    "senderOrganizationId": "0123456789",
+    "attachments": [
+        {
+          "httpPartName": "upfile1",
+          "mainContent": true,
+          "attachmentSigned": false
+        }
+    ],
+    "bodyMainContent": false,
+    "replyAuthorized": false
 }
 ```
 
