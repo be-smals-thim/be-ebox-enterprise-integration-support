@@ -2,13 +2,13 @@
 
 # Message Registry Service
 
-In order to be a Document Provider one MUST implement a Message Registry Service and Register that service on the Provider Registry Service. This service MUST follow the [e-Box Message Registry open api Spec](../openapi/ebox-rest-2.1.yaml)
+In order to be a Document Provider one MUST implement a Message Registry Service and Register that service on the Provider Registry Service. This service MUST follow the [e-Box Message Registry open api Spec]((https://info.eboxenterprise.be/fr/documents/zip/e-Box-Enterprise-swagger-v2.1-AP-Public.zip))
 
 ## Introspect of an e-Box Enterprise Oauth Token
 
-The DP methods are secured by Oauth2 tokens. Instropsecting these token can be tricky since they instrospect endpoint security is quite high using oauth itself to secure the call to the ``/introspect`` endpoint.
+The DP methods are secured by Oauth2 tokens. Introspecting these token can be tricky since the introspect endpoint security is quite high using oauth itself to secure the call to the ``/introspect`` endpoint.
 
-The introspect endpoint return serveral information the most important being the organization Cbe which is the unique identifier of an organization and of it's e-Box.
+The introspect endpoint return several information, the most important being the organization CBE which is the unique identifier of an organization and of it's e-Box.
 
 Here is an example introspect payload.
 
@@ -75,7 +75,7 @@ From all of the API endpoints, only a few are actually used by the portal.
 
 ### HTTP Cache headers guidelines
 
-In order to offer the best possible user experience cache control headers MUST be used on some the ``/referneceData/**`` endpoints. These endpoints are heavily used by the e-Box Enterprise UI which itself does not use caching so to not impose latency in data updates on the DP. 
+In order to offer the best possible user experience cache control headers MUST be used on some the ``/referenceData/**`` endpoints. These endpoints are heavily used by the e-Box Enterprise UI which itself does not use caching so to not impose latency in data updates on the DP. 
 
 The following endpoints are MUST have significant cache control headers. 
 
@@ -101,6 +101,6 @@ It gives access to all information of all Messages with the notable exception of
 
 ### Text search feature
 
-The Text search feature allows substring search in all visible textual information related to a message in the language of the user. Search excludes reasearch in the document or body content themselves.
+The Text search feature allows substring search in all visible textual information related to a message in the language of the user. Search excludes research in the document or body content themselves.
 
-.. More information comming soon.
+.. More information coming soon.
