@@ -4,11 +4,11 @@
 The organisation, the application and the message types are part of the reference data and are relative to the sender organisation that can publish messages
 
 ## What does the cookbook say?
-### Principes
+### Principles
 The ebox/enterprise RESTful API proposes 3 types of referenceData: messageType, senderOrganization, and senderApplication.
-+ A senderOrganizationId MUST be the BCE/KBO number of the related organization.
++ A senderOrganizationId MUST be the CBE (BCE/KBO) number of the related organization.
 + A senderOrganizationShortName and LongName SHOULD match the official names, except in case of valid business reason.
-+ A senderApplication referenceData is not necessarily required. If provided, it is good practice to refer to data known to the end user (for example, online service names and descriptions).
++ For a senderApplication it is good practice to refer to data known to the end user (for example, online service names and descriptions).
 + A MessageType is required to categorize a message in the form of a well-known business category for several documents.
 Each referenceDataId used as property of a message MUST correspond to a well-defined referenceData.
 
@@ -27,8 +27,9 @@ Each referenceDataId used as property of a message MUST correspond to a well-def
 + Organisation and Application are defined in the 3 national languages (fr, nl, de), in the description of those parameters
 
 + Multiple message types can be defined, for the same couple of organization and application
-The messageType identifies the type of the message. A message type is defined with eBoxIntegration@smals.be when an institution wants to publish a new sort of message to e-Box (by means of an identification form). 
-In addition that each message type is linked with an institution and a sender application, it is associated with a validity period, some security checks, and possible metadata, format of metadata included.
+The messageType identifies the type of the message. 
+In addition that each message type is linked with an institution and a sender application, it is associated with a validity period, some security checks, and possible business data, format of business data included.
+A message type is defined with [eBoxIntegration@smals.be](mailto:eBoxIntegration@smals.be) when an institution wants to publish a new sort of message to e-Box (by means of an identification form). 
 
 + There is also the logo support of the organisation or application
 A logo MUST be a PNG, GIF, JPG or JPEG image on a transparent background. The small size proposed for the images (<100 pixels height = width) MUST be respected.
