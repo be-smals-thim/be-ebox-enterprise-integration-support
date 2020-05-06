@@ -18,11 +18,9 @@ Each referenceDataId used as property of a message MUST correspond to a well-def
 
 + Mandatory definitions are Id and short name of the organisation, application or message types.
 
-+ In the details of a referenceData organisation and message type, it is planned to list the identifiers of the others referenceData related to the current one:
-  + For a given senderOrganization, the lists of related senderApplicationId(s) and messageTypeId(s) are provided. 
-  This is the "natural" way to see the relations between the reference data. Basically we work in a structure of 3 levels: level 1 - Organisation, level 2 - Application and level 3 - Message Type
-
-  + For a given messageType, the lists of related senderOrganisationIds and senderApplicationIds are provided. The case that multiple organisations and applications for one message type is rare but in the current implementation it is possible
++ In the details of a referenceData organisation and message type, it is planned to list the identifiers of the other referenceData related to the current one. 
+There is no mandatory rule to define the relation. 
+As an example, the "natural" way to see the relations between the reference data is that we work in a structure of 3 levels: level 1 - Organisation, level 2 - Application and level 3 - Message Type
 
 + Organisation and Application are defined in the 3 national languages (fr, nl, de), in the description of those parameters
 
