@@ -2,7 +2,7 @@
 
 [Document Sender onboarding process](onboarding_process.md)
 
-Publication happen through the ```/publishMessage``` method of the [e-Box Document Provider API](https://info.eboxenterprise.be/fr/documents/zip/e-Box-Enterprise-swagger-v2.1-AP-Public.zip)
+Publication happen through the ```/publishMessage``` method of the [e-Box RESTful API](https://info.eboxenterprise.be/fr/documents/zip/e-Box-Enterprise-swagger-v2.1-AP-Public.zip)
 
 The method uses a multipart HTTP POST to send up to 6 documents attached to a an e-Box Message. The API fully support [end to end streaming](#EndToEndStreamingConsiderations).
 
