@@ -1,10 +1,9 @@
 # Becoming a Document Sender
 
-[Document Sender onboarding process](onboarding_process.md)
-
 Publication happen through the ```/publishMessage``` method of the [e-Box RESTful API](https://info.eboxenterprise.be/fr/documents/zip/e-Box-Enterprise-swagger-v2.1-AP-Public.zip)
-
 The method uses a multipart HTTP POST to send up to 6 documents attached to a an e-Box Message. The API fully support [end to end streaming](#EndToEndStreamingConsiderations).
+
+The authentication has to be done via a [OAuth2 token request](#getToken). See the [Document Sender onboarding process](onboarding_process.md) to configure your enterprise as a new OAuth client.
 
 ## Minimal publication example
 
@@ -72,13 +71,21 @@ Example:
 ```
 The ``type`` is used to determine if the attention is for a person or a group of person. For the moment, only ``"person"`` is suported. The ``id`` property is the National Register Number.
 
-## Getting an Oauth Token for publication
+## <a id="getToken"></a>Getting an Oauth Token for publication
 
-The [oauth introspect example](../examples/ouath-introspect) shows how an Oauth token can be retrieved. 
+The [oauth introspect example](../examples/ouath-introspect) shows how an Oauth token can be retrieved.
+You have to request your AccessToken to the Authorization Server.
+The ``GetAccessTokenV3.getAccessToken()`` method is the one responsible of getting the token.
 
-The ``GetAccessTokenV3.getAccessToken()`` method is the one responsible of getting the token. 
+<table>
+<tr><td>OAuth Authorization Server URL (ACC)</td><td>https://services-acpt.socialsecurity.be/REST/oauth/v3/token</td></tr>
+<tr><td>Audience (ACC)</td><td>https://oauthacc.socialsecurity.be</td></tr>
+<tr><td>OAuth Authorization Server URL (PRD)</td><td>https://services.socialsecurity.be/REST/oauth/v3/token</td></tr>
+<tr><td>Audience (PRD)</td><td>https://oauth.socialsecurity.be</td></tr>
+</table>
 
-Getting a token requires having cleared the oauth part of the onboarding.
+Getting a token requires having cleared the OAuth part of the onboarding. If it is not done yet, see the [Document Sender onboarding process](onboarding_process.md).
+
 
 ## <a id="EndToEndStreamingConsiderations"></a>End to end Streaming Considerations
 

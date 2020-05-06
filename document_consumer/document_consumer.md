@@ -18,7 +18,7 @@ The ``GetAccessTokenV3.getAccessToken()`` method is the one responsible of getti
 <tr><td>Audience (PRD)</td><td>https://oauth.socialsecurity.be</td></tr>
 </table>
 
-Getting a token requires having cleared the oauth part of the onboarding. If it is not done yet, see the [Document Consumer onboarding process](onboarding_process.md).
+Getting a token requires having cleared the OAuth part of the onboarding. If it is not done yet, see the [Document Consumer onboarding process](onboarding_process.md).
 
 You will get the scopes:
 - ``scope:document:management:consult:ws-eboxrestentreprise:summaryownebox`` to get the summary of your e-Box;
