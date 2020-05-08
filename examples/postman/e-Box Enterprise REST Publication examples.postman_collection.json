@@ -1,0 +1,318 @@
+{
+	"info": {
+		"_postman_id": "0aa2701e-101e-4058-8bbd-1b260846329b",
+		"name": "e-Box Enterprise REST Publication examples",
+		"description": "A collection a e-Box publication examples using the e-Box Enterprise REST web service.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Publish one document",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "messageToPublish",
+							"value": "{\"recipient\":{\"eboxType\":\"enterprise\",\"eboxIdValue\":\"0852093431\"},\"subject\":{\"nl\":\"Test bericht publicatie REST\"},\"messageTypeId\":\"TEST_PILOT_5_ENTERPRISE\",\"senderOrganizationId\":\"0220916609\",\"senderApplicationId\":\"document:management:consult:ws-eboxrestentreprise:0220916609\",\"attachments\":[{\"httpPartName\":\"upfile1\",\"mainContent\":true,\"attachmentSigned\":false}],\"bodyMainContent\":false,\"replyAuthorized\":false}",
+							"description": "Message object to publish",
+							"type": "text"
+						},
+						{
+							"key": "upfile1",
+							"description": "File to publish",
+							"type": "file",
+							"src": "JPGTestFile.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{EndpointEnterpriseMessageRegistryV2}}publishMessage",
+					"host": [
+						"{{EndpointEnterpriseMessageRegistryV2}}publishMessage"
+					]
+				},
+				"description": "To publish a document for an enterprise"
+			},
+			"response": []
+		},
+		{
+			"name": "Publish a document for citizen",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "multipart/form-data"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "messageToPublish",
+							"value": "{\"recipient\":{\"eboxType\":\"citizen\",\"eboxIdValue\":\"94022722580\"},\"subject\":{\"fr\":\"Document pour citoyen\"},\"messageTypeId\":\"TEST_PILOT_5_CITIZEN\",\"senderOrganizationId\":\"0220916609\",\"senderApplicationId\":\"document:management:consult:ws-eboxrestentreprise:0220916609\",\"attachments\":[{\"httpPartName\":\"upfile1\",\"mainContent\":true,\"attachmentSigned\":false}],\"bodyMainContent\":false, \"replyAuthorized\": false}",
+							"description": "Message object to publish",
+							"type": "text"
+						},
+						{
+							"key": "upfile1",
+							"description": "File to publish",
+							"type": "file",
+							"src": "/C:/Users/jabu/git/system/functional-tests/REST/TestFile1.pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{EndpointEnterpriseMessageRegistryV2}}publishMessage",
+					"host": [
+						"{{EndpointEnterpriseMessageRegistryV2}}publishMessage"
+					]
+				},
+				"description": "To publish a document for a citizen."
+			},
+			"response": []
+		},
+		{
+			"name": "Publish only a body",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c93bcd46-2f30-47ad-8a40-0d28066b5031",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "multipart/form-data"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "messageToPublish",
+							"value": "{\"recipient\":{\"eboxType\":\"enterprise\",\"eboxIdValue\":\"0534530277\"},\"subject\":{\"nl\":\"Test pub REST doc and body\"},\"messageTypeId\":\"TEST_PILOT_5_ENTERPRISE\",\"senderOrganizationId\":\"0220916609\",\"senderApplicationId\":\"document:management:consult:ws-eboxrestentreprise:0220916609\",\"attachments\":[],\"bodyMainContent\":true,\"bodyContent\":{\"nl\":\"Dutch body content is here\"},\"replyAuthorized\":false,\"businessDataList\":[{\"key\": \"BECBE\",\"values\": [{\"nl\": \"dutchV2\"},{\"fr\": \"frenchV2b\"}]}]}",
+							"description": "Message object to publish",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{EndpointEnterpriseMessageRegistryV2}}publishMessage",
+					"host": [
+						"{{EndpointEnterpriseMessageRegistryV2}}publishMessage"
+					]
+				},
+				"description": "To publish a textual body. The body will be displayed if the recipient consult the message with the human interface."
+			},
+			"response": []
+		},
+		{
+			"name": "Publish doc + business data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a283bd08-8021-4df0-832f-3295e1741bec",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "multipart/form-data"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "messageToPublish",
+							"value": "{\"recipient\":{\"eboxType\":\"enterprise\",\"eboxIdValue\":\"0852093431\"},\"subject\":{\"nl\":\"Test pub REST doc and metadata\"},\"messageTypeId\":\"TEST_PILOT_5_ENTERPRISE\",\"senderOrganizationId\":\"0220916609\",\"senderApplicationId\":\"document:management:consult:ws-eboxrestentreprise:0220916609\",\"attachments\":[{\"httpPartName\":\"upfile1\",\"mainContent\":true,\"attachmentSigned\":false}],\"bodyMainContent\":false,\"replyAuthorized\":false,\"businessDataList\":[{\"key\": \"BECBE\",\"values\": [{\"nl\": \"a BECBE num\"},{\"nl\": \"a second BECBE num\"}]}]}",
+							"description": "Message object to publish",
+							"type": "text"
+						},
+						{
+							"key": "upfile1",
+							"description": "File to publish",
+							"type": "file",
+							"src": "TXTTestFile.txt"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{EndpointEnterpriseMessageRegistryV2}}publishMessage",
+					"host": [
+						"{{EndpointEnterpriseMessageRegistryV2}}publishMessage"
+					]
+				},
+				"description": "To publish a document with some business data that can be usefull to use as a search criteria."
+			},
+			"response": []
+		},
+		{
+			"name": "Publish maximal: body + 6 docs + business data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f40ed4d8-e232-4df6-8272-0e003fe8c430",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "multipart/form-data"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "messageToPublish",
+							"value": "{\"recipient\":{\"eboxType\":\"enterprise\",\"eboxIdValue\":\"0534530277\"},\"subject\":{\"nl\":\"Test pub REST doc and body\"},\"messageTypeId\":\"TEST_PILOT_5_ENTERPRISE\",\"senderOrganizationId\":\"0220916609\",\"senderApplicationId\":\"document:management:consult:ws-eboxrestentreprise:0220916609\",\"attachments\":[{\"httpPartName\":\"upfile1\",\"mainContent\":false,\"attachmentSigned\":false},{\"httpPartName\":\"upfile2\",\"mainContent\":false,\"attachmentSigned\":false},{\"httpPartName\":\"upfile3\",\"mainContent\":false,\"attachmentSigned\":false},{\"httpPartName\":\"upfile4\",\"mainContent\":false,\"attachmentSigned\":false},{\"httpPartName\":\"upfile5\",\"mainContent\":false,\"attachmentSigned\":false},{\"httpPartName\":\"upfile6\",\"mainContent\":false,\"attachmentSigned\":false}],\"bodyMainContent\":true,\"bodyContent\":{\"nl\":\"Dutch body content is here\"},\"replyAuthorized\":false,\"businessDataList\":[{\"key\": \"BECBE\",\"values\": [{\"nl\": \"dutchV2\"},{\"fr\": \"frenchV2b\"}]}]}",
+							"description": "Message à publier",
+							"type": "text"
+						},
+						{
+							"key": "upfile1",
+							"description": "Document à publier",
+							"type": "file",
+							"src": "TXTTestFile.txt"
+						},
+						{
+							"key": "upfile2",
+							"type": "file",
+							"src": "PDFTestFile.pdf"
+						},
+						{
+							"key": "upfile3",
+							"type": "file",
+							"src": "PNGTestFile.png"
+						},
+						{
+							"key": "upfile4",
+							"type": "file",
+							"src": "XLSXTestFile.xlsx"
+						},
+						{
+							"key": "upfile5",
+							"type": "file",
+							"src": "JPEGTestFile.jpeg"
+						},
+						{
+							"key": "upfile6",
+							"type": "file",
+							"src": "PPTTestFile.ppt"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{EndpointEnterpriseMessageRegistryV2}}publishMessage",
+					"host": [
+						"{{EndpointEnterpriseMessageRegistryV2}}publishMessage"
+					]
+				},
+				"description": "To publish a message with a textual body with some business data and also 6 attachments.\nThe body will be displayed if the recipient consult the message with the human interface."
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "pasteYourTokenHere",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "595562a5-ad3b-4c08-a864-c0e24d01071f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b25c689b-7188-4f6b-9e40-3c3b8eab578e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
