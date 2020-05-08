@@ -2,7 +2,7 @@
 
 # Message Registry Service
 
-In order to be a Document Provider one MUST implement a Message Registry Service and Register that service on the Provider Registry Service. This service MUST follow the [e-Box Message Registry open api Spec]((https://info.eboxenterprise.be/fr/documents/zip/e-Box-Enterprise-swagger-v2.1-AP-Public.zip))
+In order to be a Document Provider one MUST implement a Message Registry Service and Register that service on the Provider Registry Service. This service MUST follow the [e-Box Message Registry open api Spec](../openapi/ebox-rest_page.md)
 
 ## Introspect of an e-Box Enterprise Oauth Token
 
