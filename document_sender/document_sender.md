@@ -91,6 +91,14 @@ Getting a token requires having cleared the OAuth part of the onboarding. If it 
 
 The order of HTTP parts is arbitrary, each part being linked to its associated meta-data by the ``httpPartName`` property of the publication payload. This allows for end to end streaming on the Document Sender side. See the [Publication Profile Documentation for more information](../document_provider/publication_profile.md#OrderOfTheHttpParts).
 
+## Examples with Postman
+If you use Postman, you might be interested in a [Postman publication examples collection](../examples/postman/e-Box%20Enterprise%20REST%20Publication%20examples.postman_collection.json).
+After importing that collection,
+- Paste your token in the Authorization tab in the menu to edit the collection and then, for each collection,
+- Replace the ``upfile1`` to ``upfile6`` in the body of the requests with a file in your desktop,
+- Replace ``senderOrganizationId``, ``senderApplicationId`` and ``messageTypeId`` with what you are authorized to use,
+- Set the variable ``EndpointEnterpriseMessageRegistryV2`` with the corresponding endpoint as value, terminating with a slash.
+
 ## Our implementation choices
 
 There are some restrictions in our implementation of the service:
