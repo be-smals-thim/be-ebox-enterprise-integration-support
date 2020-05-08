@@ -4,9 +4,9 @@
 ## Onboarding form request
 To become a new e-Box Enterprise DocConsumer, your enterprise needs to send the following documents to [eBoxIntegration@smals.be](mailto:eBoxIntegration@smals.be).
 - The public part of the certificate you will use;
-- The completed document “e-Box DocConsumer request form and terms of use”, signed by a Legal Representative of your company.
+- The completed document “[e-Box DocConsumer request form and terms of use](https://info.eboxenterprise.be/fr/documents/word/e-Box_DocConsumer_onboarding_form.docx)”, signed by a Legal Representative of your company.
 
-The certificate need a [X.509 certificate](../common/x509_certificate.md).
+The certificate needed is a [X.509 certificate](../common/x509_certificate.md).
 The request must be sent to [QuoVadis](mailto:info.be@quovadisglobal.com).
 Please pay attention to respect the expected format. It’s also important to have a distinct certificate for each work environment (Acceptance, Production).
 

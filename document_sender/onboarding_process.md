@@ -29,4 +29,4 @@ Once the needed configuration is ready, you can proceed to the technical integra
 When your tests are completed and conclusive, you can request to move to the following environment (Acceptance; Production), still via [eBoxIntegration@smals.be](mailto:eBoxIntegration@smals.be).
 
 ## Production-ready
-Once the configuration is ready in the Production environment, your integration with the e-Box system can go “live”. Congratulations, your organization is now a new e-Box DocSender!
+Once the configuration is ready in the Production environment, your [integration with the e-Box system](document_sender.md) can go “live”. Congratulations, your organization is now a new e-Box DocSender!
