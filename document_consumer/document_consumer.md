@@ -27,10 +27,10 @@ You will get the scopes:
 ## Endpoints
 Once you have got your token, you can call a method using one of these endpoints:
 
-| Environment | Endpoint e-Box enterprise                                                        |
-|-------------|----------------------------------------------------------------------------------|
-|  Acceptance | https://services-acpt.socialsecurity.be/REST/ebox/enterprise/messageRegistry/v2/ |
-|  Production | https://services.socialsecurity.be/REST/ebox/enterprise/messageRegistry/v2       |
+| Environment| Endpoint e-Box enterprise                                                           |
+|------------|-------------------------------------------------------------------------------------|
+| Acceptance | ``https://services-acpt.socialsecurity.be/REST/ebox/enterprise/messageRegistry/v2/``|
+| Production | ``https://services.socialsecurity.be/REST/ebox/enterprise/messageRegistry/v2``      |
 
 ## Implementation choices
 If you request to get a reference data, the lists messageTypeIds, senderOrganizationIds and senderApplicationIds in response will be empty.

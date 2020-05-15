@@ -89,10 +89,10 @@ Getting a token requires having cleared the OAuth part of the onboarding. If it 
 ## Endpoints
 Once you have got your token, you can call a method using one of these endpoints:
 
-| Environment | Endpoint e-Box enterprise                                                        |
-|-------------|----------------------------------------------------------------------------------|
-|  Acceptance | https://services-acpt.socialsecurity.be/REST/ebox/enterprise/messageRegistry/v2/ |
-|  Production | https://services.socialsecurity.be/REST/ebox/enterprise/messageRegistry/v2       |
+| Environment| Endpoint e-Box enterprise                                                           |
+|------------|-------------------------------------------------------------------------------------|
+| Acceptance | ``https://services-acpt.socialsecurity.be/REST/ebox/enterprise/messageRegistry/v2/``|
+| Production | ``https://services.socialsecurity.be/REST/ebox/enterprise/messageRegistry/v2``      |
 
 ## <a id="EndToEndStreamingConsiderations"></a>End to end Streaming Considerations
 
