@@ -86,6 +86,13 @@ The ``GetAccessTokenV3.getAccessToken()`` method is the one responsible of getti
 
 Getting a token requires having cleared the OAuth part of the onboarding. If it is not done yet, see the [Document Sender onboarding process](onboarding_process.md).
 
+## Endpoints
+Once you have got your token, you can call a method using one of these endpoints:
+
+| Environment | Endpoint e-Box enterprise                                                        |
+|-------------|----------------------------------------------------------------------------------|
+|  Acceptance | https://services-acpt.socialsecurity.be/REST/ebox/enterprise/messageRegistry/v2/ |
+|  Production | https://services.socialsecurity.be/REST/ebox/enterprise/messageRegistry/v2       |
 
 ## <a id="EndToEndStreamingConsiderations"></a>End to end Streaming Considerations
 
@@ -94,7 +101,7 @@ The order of HTTP parts is arbitrary, each part being linked to its associated m
 ## Examples with Postman
 If you use Postman, you might be interested in a [Postman publication examples collection](../examples/postman/e-Box%20Enterprise%20REST%20Publication%20examples.postman_collection.json).
 After importing that collection,
-- Paste your token in the Authorization tab in the menu to edit the collection and then, for each collection,
+- Paste your token in the Authorization tab in the menu to edit the collection,
 - Replace the ``upfile1`` to ``upfile6`` in the body of the requests with a file in your desktop,
 - Replace ``senderOrganizationId``, ``senderApplicationId`` and ``messageTypeId`` with what you are authorized to use,
 - Set the variable ``EndpointEnterpriseMessageRegistryV2`` with the corresponding endpoint as value, terminating with a slash.
