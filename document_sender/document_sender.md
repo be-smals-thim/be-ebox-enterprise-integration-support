@@ -71,6 +71,36 @@ Example:
 ```
 The ``type`` is used to determine if the attention is for a person or a group of person. For the moment, only ``"person"`` is suported. The ``id`` property is the National Register Number.
 
+## Minimal publication example for a citizen
+If the recipient is a citizen, the example below show a minimal publication.
+
+```json
+messageToPublish: {
+    "recipient": {
+      "eboxType": "citizen",
+      "eboxIdValue": "71022722580"
+    },
+    "subject": {
+      "fr": "Message de test"
+    },
+    "senderApplicationId": "employment:job-attest:werkkaart",
+    "messageTypeId": "WK1-ACTIVA",
+    "senderOrganizationId": "0123456789",
+    "attachments": [
+        {
+          "httpPartName": "upfile1",
+          "mainContent": true,
+          "attachmentSigned": false
+        }
+    ],
+    "bodyMainContent": false,
+    "replyAuthorized": false
+}
+```
+
+The difference is in the ``recipient`` object. The ``eboxType`` becomes ``citizen`` and the ``eboxIdValue`` is the recipient SSIN.
+Also you cannot let a ``messageTypeId`` and a ``senderApplicationId`` that are used only for enterprise-to-enterprise publication.
+
 ## <a id="getToken"></a>Getting an Oauth Token for publication
 
 The [oauth introspect example](../examples/ouath-introspect) shows how an Oauth token can be retrieved.
