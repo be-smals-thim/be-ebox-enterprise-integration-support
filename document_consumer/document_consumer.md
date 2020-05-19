@@ -23,6 +23,7 @@ You will get the scopes:
 - ``scope:document:management:consult:ws-eboxrestentreprise:summaryownebox`` to get the summary of your e-Box;
 - ``scope:document:management:consult:ws-eboxrestentreprise:messagesfull`` to get and perform authorized actions on all messages in your e-Box;  
 - ``scope:document:management:consult:ws-eboxrestentreprise:referencedata`` to retrieve the details of the messageTypes, senderOrganizations, and senderApplications.
+- ``scope:documentmanagement:ebox:enterprise:federation-rest:registry`` to get the list of Document Providers
 
 ## Endpoints
 Once you have got your token, you can call a method using one of these endpoints:

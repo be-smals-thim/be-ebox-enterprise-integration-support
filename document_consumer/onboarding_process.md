@@ -16,6 +16,7 @@ As a DocConsumer, you will get the necessary scopes to perform all the possible 
 - **summary_own_ebox** (``scope:document:management:consult:ws-eboxrestentreprise:summaryownebox``) to get the summary of your e-Box; 
 - **messages_full** (``scope:document:management:consult:ws-eboxrestentreprise:messagesfull``) to get and perform authorized actions on all messages in your ebox;  
 - **reference_data** (``scope:document:management:consult:ws-eboxrestentreprise:referencedata``) to retrieve the details of the messageTypes, senderOrganizations, and senderApplications.
+- **Provider Registry** (``scope:documentmanagement:ebox:enterprise:federation-rest:registry``) to get the list of Document Providers.
 
 ## Technical integration
 You can then call the Authorization Server to get your Access token.
