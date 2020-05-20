@@ -26,12 +26,19 @@ You will get the scopes:
 - ``scope:documentmanagement:ebox:enterprise:federation-rest:registry`` to get the list of Document Providers
 
 ## Endpoints
-Once you have got your token, you can call a method using one of these endpoints:
+Once you have got your token, you can find the list of Document Providers to call in the result of a GET request to the *Provider Registry*:
+
+| Environment| URL Provider Registry                                                                     |
+|------------|------------------------------------------------------------------------------------------------|
+| Acceptance | ``https://services-acpt.socialsecurity.be/REST/ebox/enterprise/federation/v1/messageProviders``|
+| Production | ``https://services.socialsecurity.be/REST/ebox/enterprise/federation/v1/messageProviders``     |
+
+Among them, you can find our Document Provider:
 
 | Environment| Endpoint e-Box enterprise                                                           |
 |------------|-------------------------------------------------------------------------------------|
 | Acceptance | ``https://services-acpt.socialsecurity.be/REST/ebox/enterprise/messageRegistry/v2/``|
-| Production | ``https://services.socialsecurity.be/REST/ebox/enterprise/messageRegistry/v2``      |
+| Production | ``https://services.socialsecurity.be/REST/ebox/enterprise/messageRegistry/v2/``      |
 
 ## Implementation choices
 If you request to get a reference data, the lists messageTypeIds, senderOrganizationIds and senderApplicationIds in response will be empty.
