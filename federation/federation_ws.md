@@ -39,6 +39,6 @@ There are two use cases for e-Box preferences
 
 ## Technical information
 
-- [Federation WS Open Api 2 Spec](../openapi/ebox-federation-1.3.yaml)
+- [Federation WS Open Api 2 Spec](https://info.eboxenterprise.be/fr/documents/zip/e-Box-Enterprise-swagger-Federation.zip)
 - ACC URL: https://services-acpt.socialsecurity.be/REST/ebox/enterprise/federation/v1/  
 - PRD URL:  https://services.socialsecurity.be/REST/ebox/enterprise/federation/v1

@@ -12,7 +12,7 @@ This step is optional but often very useful in order to answer any questions bef
 
 ## Formal request & contract + certificate
 In order to officially become a new DocProvider, please send the following documents to [eBoxIntegration@smals.be](mailto:eBoxIntegration@smals.be):
-- e-Box DocProvider onboarding form & contract (the contract must be signed by a Legal Representative from your organization);
+- [e-Box DocProvider onboarding form & contract](https://info.eboxenterprise.be/fr/documents/word/e-Box_DocProvider_onboarding_form.docx) (the contract must be signed by a Legal Representative from your organization);
 - The public part of your certificate;
 If you need to order a [X.509 certificate](../common/x509_certificate.md) to [QuoVadis](mailto:info.be@quovadisglobal.com), please pay attention to respect the expected format.
 Once completed, the form must be sent.

@@ -2,7 +2,7 @@
 
 # Message Registry Service
 
-In order to be a Document Provider one MUST implement a Message Registry Service and Register that service on the Provider Registry Service. This service MUST follow the [e-Box Message Registry open api Spec]((https://info.eboxenterprise.be/fr/documents/zip/e-Box-Enterprise-swagger-v2.1-AP-Public.zip))
+In order to be a Document Provider one MUST implement a Message Registry Service and Register that service on the Provider Registry Service. This service MUST follow the [e-Box Message Registry open API Spec](../openapi/ebox-rest_page.md)
 
 ## Introspect of an e-Box Enterprise Oauth Token
 
@@ -41,6 +41,8 @@ Proper Oauth2 treatment of the token will not be described here as it is done ou
 - ``active`` needs to be checked, if false the token is not acceptable
 - ``scope`` need to be checked based on the endpoint 
 - ``principalAttributes[‘urn:be:fgov:kbo-bce:organization:cbe-number’][0]`` contains the CBE number which identifies the e-Box of the user.
+That CBE number is not necessarily in 10 digits format and so you may need to add a prefix with as many 0 as needed to obtain the 10 digits format.
+In the e-Box services, CBE numbers must be encoded in 10 digits.
 
 The following resources expand a bit on the subject:
 
@@ -72,6 +74,18 @@ From all of the API endpoints, only a few are actually used by the portal.
 - ``/referenceData/messageType/<id>``: This method is called for every single message displayed in e-Box.
 
 **Note:** Integration to portal in ACC is allowed when this minimal set of resources has been implemented.
+
+### Required fields
+
+The fields ``items`` and ``totalItems`` are required in the following Json Schemas described in the [API](../openapi/ebox-rest_page.md):
+
+- ``Attachments``
+- ``BusinessDataList``
+- ``MessageTypes``
+- ``Messages``
+- ``MessagesToUpdate``
+- ``SenderApplications``
+- ``SenderOrganizations``
 
 ### HTTP Cache headers guidelines
 
