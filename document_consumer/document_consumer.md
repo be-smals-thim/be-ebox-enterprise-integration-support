@@ -41,4 +41,5 @@ Among them, you can find our Document Provider:
 | Production | ``https://services.socialsecurity.be/REST/ebox/enterprise/messageRegistry/v2/``      |
 
 ## Implementation choices
-If you request to get a reference data, the lists messageTypeIds, senderOrganizationIds and senderApplicationIds in response will be empty.
+- The counters you get in the summary of your e-Box (that you can get with a GET on <endpoint>/ebox) take also into account the message set to not visible.
+- If you request to get a reference data, the lists messageTypeIds, senderOrganizationIds and senderApplicationIds in response will be empty.
