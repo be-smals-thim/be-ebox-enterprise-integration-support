@@ -146,3 +146,4 @@ There are some restrictions in our implementation of the service:
 - The business data put in a ``messageToPublish`` can only be those defined for the message type created during the [Onboarding process](onboarding_process.md).
 - The ``originalMessageId`` in the ``messageToPublish`` object is only supported in the case of a reply. The value to put is the ID of the message to reply.
 - We do not accept null values. If a property has to be null, like ``"registeredMail": null``, the equivalent we accept is to not put that property.
+- We do not support payment data.
