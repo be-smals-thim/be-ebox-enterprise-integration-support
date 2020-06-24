@@ -139,7 +139,7 @@ After importing that collection,
 ## Our implementation choices
 
 There are some restrictions in our implementation of the service:
-- We do not support publication with several languages. Only one among ``fr``, ``nl`` and ``de`` has to be selected in a publication request for the subject, attachment title, body content and business data values.
+- [Following a legal advice](../media/20200618%20Taalwetgeving%20en%20e-Box.docx), we do not support publication with several languages. Only one among ``fr``, ``nl`` and ``de`` has to be selected in a publication request for the subject, attachment title, body content and business data values.
 - We do not support the ``attachmentTitle`` property in the ``AttachmentToPublish`` object. The attachment title will be the file name of the uploaded file.
 - ``/linkEboxMessage`` feature is not implemented but the broadcast feature still available by asking the procedure to [eBoxIntegration@smals.be](mailto:eBoxIntegration@smals.be).
 - We do not support dynamic expiration date. That is to say, in the API about the ``messageToPublish`` object, the ``expirationDate`` property is ignored. The expiration date will be calculated from the current date plus the validity period defined for the message type. You can see the ``validityPeriod`` by doing a GET on ``<endpoint>/referenceData/messageTypes/<messageType-ID>``
