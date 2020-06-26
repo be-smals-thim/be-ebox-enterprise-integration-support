@@ -87,6 +87,8 @@ The fields ``items`` and ``totalItems`` are required in the following Json Schem
 - ``SenderApplications``
 - ``SenderOrganizations``
 
+If there is no item, do not put null as value for the item property but a void list.
+
 ### HTTP Cache headers guidelines
 
 In order to offer the best possible user experience cache control headers MUST be used on some the ``/referenceData/**`` endpoints. These endpoints are heavily used by the e-Box Enterprise UI which itself does not use caching so to not impose latency in data updates on the DP. 
