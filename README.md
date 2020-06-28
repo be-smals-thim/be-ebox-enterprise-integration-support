@@ -1,3 +1,6 @@
+**This site is now deprecated in favor of the upcoming documentation site. The new Documentation site is under construction here https://eboxenterprise-documentation-site.vercel.app/ **
+
+
 # Tools & Tricks to integrate with e-Box Enterprise
  
 An unofficial set of tools that helps with integration with [https://www.eboxenterprise.be](https://www.eboxenterprise.be) site.
