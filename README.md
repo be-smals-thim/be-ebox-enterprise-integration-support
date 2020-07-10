@@ -1,4 +1,4 @@
-***This site is now deprecated in favor of the upcoming documentation site. The new Documentation site is under construction here https://eboxenterprise-documentation-site.vercel.app/.***
+# ***This site is now deprecated in favor of the [documentation site](https://dev.eboxenterprise.be/).***
 
 ***Code examples have also a new home: https://github.com/e-Box-Enterprise-Belgium/examples***
 
